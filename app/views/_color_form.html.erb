@@ -1,0 +1,29 @@
+<style type="text/css">
+  input[type=text] {
+    width: 90%;
+}
+</style>
+
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <div class="col-xs-1">
+      &nbsp;
+    </div>
+    <div class="col-xs-6">
+      <h2 style="padding-left: 0px;"><%= title %></h2>
+	  
+      <%= form_for(:color, :url => {:action => form_action }, :method => form_method, :html=>{"role" => "form"}) do |f| %>
+
+	  	<% flash.each do |key, value| %>
+  	  		<span class="error <%= key %>"><%= value %></span>
+		<% end %>
+		<%= render "form_elements" %>
+        <div class="actions">
+          <input type="submit" class="btn btn-primary" value="<%= submit_text %>" />
+        </div>		
+      <% end %>
+
+    </div>
+
+  </div>
+</div>

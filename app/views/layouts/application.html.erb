@@ -6,9 +6,26 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body  style = "width:600px;">
 
 <%= yield %>
+
+    <div id="fileUploaderContainer" class="modal fade" tabindex="0" role="dialog" aria-labelledby="uploadFile" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <strong id="uploadFileHeader">Upload a File</strong>
+          </div>
+
+          <div class="modal-body">
+            <div id="uploadContainer" class="modal-body">
+              <%= render(:partial => "common/file_uploader" , :object => {}) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 </body>
 </html>

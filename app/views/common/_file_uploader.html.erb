@@ -1,0 +1,20 @@
+<div class="container-fluid">
+  <div class="row-fluid">
+    <form method="POST" action="/uploads" id="uploadForm" enctype="multipart/form-data">
+      <div class="control-group cf">
+        <input id="uploadFileType" name="file_type" value="" type="hidden"/>
+        <div class="controls">
+          <div class="fileupload fileupload-new" data-provides="fileupload">
+            <div class="fileupload-preview thumbnail" style="max-width: 140px; height: auto;max-height: 140px; width: auto;"><img src="/images/choose.gif" /></div>
+            <div>
+              <span id="upload" class="btn btn-primary btn-file"><span class="fileupload-new">Choose File</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+
+            </div>
+          </div>
+        </div>
+        <br/>
+        <input style="float: right;" type="submit" class="btn btn-primary" value="Upload" id=""></input>
+      </div>
+    </form>
+  </div>
+</div>

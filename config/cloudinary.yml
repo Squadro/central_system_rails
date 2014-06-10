@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dvfwrvcmi
+  api_key: '895474921774373'
+  api_secret: fwPQtiJY2645FWkIPCERxGed-dI
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dvfwrvcmi
+  api_key: '895474921774373'
+  api_secret: fwPQtiJY2645FWkIPCERxGed-dI
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dvfwrvcmi
+  api_key: '895474921774373'
+  api_secret: fwPQtiJY2645FWkIPCERxGed-dI
+  enhance_image_tag: true
+  static_image_support: false

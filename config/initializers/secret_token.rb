@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-PredictaWebapp::Application.config.secret_key_base = 'a88d3683c416b65de4046de02432ca426f4980c3d7b2974282d1e152ffba2a3888b58e8909505592ad7db65230ac9aa8d6b0f08198633ef268a392844e362c0e'
+PredictaWebapp::Application.config.secret_key_base = 'a3dc7ecca1085c7edc5eab63f45646aadf39992a647a693767c4ff3596235abbb69bcb49c9a4478d9f0ea0937c64f02485cfd14f5caa3251775591525cd6a472'

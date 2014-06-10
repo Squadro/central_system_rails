@@ -41,8 +41,13 @@ end
 # ----------------------------------------------- #
 
 gem 'mongoid', '~> 4.0.0.alpha1'
-
 gem 'devise', '~> 3.2.2'
+
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem 'twitter-bootstrap-rails'
+
+gem 'cloudinary'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
@@ -60,5 +65,3 @@ group :development do
 end
 
 gem 'puma', '~> 2.7.1'
-
-

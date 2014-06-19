@@ -1,0 +1,23 @@
+	<div class="form-group">
+	  <label class="control-label" for="clientName">Client Name</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="client[name]" type="text" id="clientName" placeholder="Name" value="<%= @client.name unless @client.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="clientEmail">Client Name</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="client[email]" type="text" id="clientEmail" placeholder="Email" value="<%= @client.email unless @client.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="clientPhoneNumber">Client Phone Number</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="client[phone_number]" type="text" id="clientPhoneNumber" placeholder="Phone number" value="<%= @client.phone_number unless @client.nil? %>"/>
+	  </div>
+	</div>
+	
+
+

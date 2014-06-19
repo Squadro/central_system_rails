@@ -3,13 +3,12 @@ class ColorsController < ApplicationController
   #TODO: Authenticate the correct user
   
   def create
-    p "---"
-    p params
-    p "---"
     @color = Color.add_new(color_create_params)
     respond_to do |format|
       format.html { redirect_to root_path }
     end
+    
+    #TODO : Add Validation error handling
   end
 
   def new

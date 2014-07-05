@@ -1,18 +1,16 @@
-class ColorsController < ApplicationController
+class ProductCodesController < ApplicationController
   
   #TODO: Authenticate the correct user
   
   def create
-    @color = Color.add_new(color_create_params)
+    @palette = ProductCode.add_new(product_code_create_params)
     respond_to do |format|
       format.html { redirect_to root_path }
     end
-    
-    #TODO : Add Validation error handling
   end
 
   def new
-    @color = Color.new
+    @palette = ProductCode.new
   end
 
 =begin
@@ -120,8 +118,8 @@ class ColorsController < ApplicationController
 =end
   private
 
-  def color_create_params
-    params.require(:color).permit(:code, :meta, :image_url)
+  def product_code_create_params
+    params.require(:palette).permit(:name, :description)
   end
   
 end

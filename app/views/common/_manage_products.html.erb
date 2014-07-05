@@ -1,0 +1,70 @@
+<% products = manage_products[:products] %>
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <h3>Manage Products</h3>
+    <a href="/products/new" class="btn btn-primary" style="float: right">New Product [+]</a>
+    <br/>
+    <br/>
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Model
+        </th>
+        <th>
+		  Pricing
+        </th>
+        <th>
+          Palette
+        </th>
+      </tr>
+	  <% if products.present? %>
+      <% products.each do |product| %>
+        <tr class="productRow">
+          <td>
+            <%= product.name %>
+          </td>
+          <td>
+            <%= product.model %>
+          </td>
+          <td>
+            <%= product.price %>
+          </td>
+          <td>
+            <%= product.palette %>
+          </td>
+          <td>
+            <a href="/products/<%= product.id %>/edit">
+              <button title="Edit Product" type="button">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+            </a>
+            <button title="Delete Product" type="button" class="deleteProductButton"
+                   data-productId="<%= product.id %>">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+        </tr>
+		<% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(".deleteProductButton").click(function(event){
+     var $target = $(event.currentTarget);
+     if(confirm("Are you sure that you want to delete the product?")){
+       var productRow = $target.closest(".productRow");
+       var productId = $target.attr("data-productId");
+       doAjaxRequest("/products/"+productId+".json", "DELETE", null, "json", function(resp){
+         $(productRow).remove();
+       }, function(xhr, status, reason){
+         alert("Could not delete the product - " + xhr.responseText)
+       });
+     }
+  })
+</script>

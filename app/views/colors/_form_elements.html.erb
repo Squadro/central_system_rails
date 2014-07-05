@@ -33,6 +33,13 @@ input[readonly] {
 	</div>
 	
 	<div class="form-group">
+	  <label class="control-label" for="colorMeta">Meta Information</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Color Meta" value="<%= @color.meta unless @color.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
 	  <label class="control-label" for="colorImageUrl">Color Image URL</label>
 	  <div class="controls">
 	    <input type="text" class="form-control" name="color[image_url]" id="colorImageUrl" placeHolder="https://yourwebsite.com/image.ext" value="<%= @color.image_url unless @color.nil?%>"/>

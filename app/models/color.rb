@@ -1,7 +1,8 @@
 class Color
   include Mongoid::Document
   
-  field :code,                  :type => String   #SL001, SL002 etc
+  field :code,                  :type => String   # SL001, SL002 etc
+  field :meta,                  :type => String   # Indicates to which this color is applicable - Laminate, General Color etc
   field :image_url,             :type => String
   field :other_data,            :type => Hash,    :default => {}
 

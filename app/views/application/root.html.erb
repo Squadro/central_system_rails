@@ -1,1 +1,3 @@
-<h3> Home of something awesome! </h3>
+<%= render(:partial => "common/manage_products" , :object => {:products => @products}) %>
+<%= render(:partial => "common/manage_palettes", :object => {:palettes => @palettes})%>
+<%= render(:partial => "common/manage_product_codes" , :object => {:product_codes => @product_codes}) %>

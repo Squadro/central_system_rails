@@ -1,0 +1,64 @@
+<% palettes = manage_palettes[:palettes] %>
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <h3>Manage Palettes</h3>
+    <a href="/palettes/new" class="btn btn-primary" style="float: right">New Palette [+]</a>
+    <br/>
+    <br/>
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Code
+        </th>
+        <th>
+          Colors
+        </th>
+      </tr>
+	  <% if palettes.present? %>
+      	<% palettes.each do |palette| %>
+        	<tr class="paletteRow">
+          	  <td>
+            	  <%= palette.name %>
+          	</td>
+          	<td>
+            	<%= palette.model %>
+          	</td>
+          	<td>
+            	<%= palette.price %>
+          	</td>
+          	<td>
+            	<%= palette.palette %>
+          	</td>
+          	<td>
+            	<a href="/palettes/<%= palette.id %>/edit">
+              	  <button title="Edit Product" type="button">
+                	  <span class="glyphicon glyphicon-edit"></span>
+              	</button>
+            	</a>
+            	<button title="Delete Product" type="button" class="deleteProductButton"
+                	   data-paletteId="<%= palette.id %>">
+              		 <span class="glyphicon glyphicon-remove"></span>
+            	 </button>
+          	</td>
+        	</tr>
+      	  <% end %>
+	  <% end %>
+    </table>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(".deleteProductButton").click(function(event){
+     var $target = $(event.currentTarget);
+     if(confirm("Are you sure that you want to delete the palette?")){
+       var paletteRow = $target.closest(".paletteRow");
+       var paletteId = $target.attr("data-paletteId");
+       doAjaxRequest("/palettes/"+paletteId+".json", "DELETE", null, "json", function(resp){
+         $(paletteRow).remove();
+       }, function(xhr, status, reason){
+         alert("Could not delete the palette - " + xhr.responseText)
+       });
+     }
+  })
+</script>

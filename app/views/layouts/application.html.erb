@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PredictaWebapp</title>
+  <title>Unsquad</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body  style = "width:600px;">
+<body>
+<header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+        <a class="brand" href="#"> <img style = "height: 80px; width: 80px;" src="assets/images/unsquad_logo.png"></a>
+          <nav>
+            <ul class="list-inline" style=" float: right;">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Help</a></li>
+              <li><a href="#">Sign in</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-<%= yield %>
-
+		<br>				
+		<br>
+		
+		<div class="container">
+			<div class="center hero-unit">
+			  <%= yield %>
+			
+			</div>
+			</div>
+		<br>
+		
     <div id="fileUploaderContainer" class="modal fade" tabindex="0" role="dialog" aria-labelledby="uploadFile" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">

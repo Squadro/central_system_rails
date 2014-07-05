@@ -1,0 +1,67 @@
+<% product_codes = manage_product_codes[:product_codes] %>
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <h3>Manage Product Codes</h3>
+    <a href="/product_codes/new" class="btn btn-primary" style="float: right">New Product Code [+]</a>
+    <br/>
+    <br/>
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Code
+        </th>
+        <th>
+          Name
+        </th>
+        <th>
+		  Description
+        </th>
+      </tr>
+	  <% if product_codes.present? %>
+	  
+      <% product_codes.each do |product_code| %>
+        <tr class="productCodeRow">
+          <td>
+            <%= product_code.name %>
+          </td>
+          <td>
+            <%= product_code.model %>
+          </td>
+          <td>
+            <%= product_code.price %>
+          </td>
+          <td>
+            <%= product_code.palette %>
+          </td>
+          <td>
+            <a href="/product_codes/<%= product_code.id %>/edit">
+              <button title="Edit Product Code" type="button">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+            </a>
+            <button title="Delete Product Code" type="button" class="deleteProductCodeButton"
+                   data-productCodeId="<%= product_code.id %>">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+        </tr>
+		<% end %>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(".deleteProductCodeButton").click(function(event){
+     var $target = $(event.currentTarget);
+     if(confirm("Are you sure that you want to delete the product code?")){
+       var productCodeRow = $target.closest(".productCodeRow");
+       var productCodeId = $target.attr("data-productCodeId");
+       doAjaxRequest("/product_codes/"+productCodeId+".json", "DELETE", null, "json", function(resp){
+         $(productCodeRow).remove();
+       }, function(xhr, status, reason){
+         alert("Could not delete the product code - " + xhr.responseText)
+       });
+     }
+  })
+</script>

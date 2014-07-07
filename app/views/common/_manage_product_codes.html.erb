@@ -11,9 +11,6 @@
           Code
         </th>
         <th>
-          Name
-        </th>
-        <th>
 		  Description
         </th>
       </tr>
@@ -25,13 +22,7 @@
             <%= product_code.name %>
           </td>
           <td>
-            <%= product_code.model %>
-          </td>
-          <td>
-            <%= product_code.price %>
-          </td>
-          <td>
-            <%= product_code.palette %>
+            <%= product_code.description %>
           </td>
           <td>
             <a href="/product_codes/<%= product_code.id %>/edit">
@@ -46,6 +37,7 @@
           </td>
         </tr>
 		<% end %>
+		
       <% end %>
     </table>
   </div>

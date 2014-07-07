@@ -119,7 +119,7 @@ class ProductCodesController < ApplicationController
   private
 
   def product_code_create_params
-    params.require(:palette).permit(:name, :description)
+    params.require(:product_code).permit(:name, :description)
   end
   
 end

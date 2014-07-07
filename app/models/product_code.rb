@@ -5,8 +5,8 @@ class ProductCode
   field :description,           :type => String   #Book case is BC
   field :other_data,            :type => Hash,    :default => {}
   
-  validates_presence_of :code
-  validates_uniqueness_of :code
+  validates_presence_of :name
+  validates_uniqueness_of :name
     
   #TODO: Write validation for code to have only two characters
   class << self

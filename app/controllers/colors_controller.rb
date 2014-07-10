@@ -15,53 +15,51 @@ class ColorsController < ApplicationController
     @color = Color.new
   end
 
-=begin
   def edit
-    @app = App.find(params[:id])
+    @color = Color.find(params[:id])
 
-    if(@app.nil?)
+    if(@color.nil?)
       flash[:error] = "You have requested an invalid data item to edit"
-      redirect_to merchant_session_url
+      redirect_to root_path
       return
     end
-    
-    if @app.merchant_id == current_merchant.id
-      respond_to do |format|
-        format.html
-      end
-    else
-      flash[:error] = "You are unauthorized to access this section"
-      redirect_to merchant_session_url
-    end
-    
   end
   
   def update
-    @app = App.find(params[:id])
+    @color = Color.find(params[:id])
     
-    if(@app.nil?)
-      flash[:error] = "You are trying to update an invalid app"
-      redirect_to merchant_session_url
+    if(@color.nil?)
+      flash[:error] = "You are trying to update an invalid color"
+      redirect_to root_path
       return
     end
     
-    if @app.merchant_id == current_merchant.id
-      if @app.update_attributes(app_create_params)
-        redirect_to "/apps/#{@app.id}/edit", :notice => 'Data was successfully updated.'
-      else
-        respond_to do |format|
-          format.html { render :action => "edit" }
-          format.json { render :json => @app.errors, :status => 422}
-        end
-      end
+    if @color.update_attributes(color_create_params)
+      redirect_to "/colors/#{@color.id}/edit", :notice => 'Data was successfully updated.'
     else
       respond_to do |format|
-        flash[:error] = "You are unauthorized to access this section"
-        redirect_to merchant_session_url
+        format.html { render :action => "edit" }
+        format.json { render :json => @color.errors, :status => 422}
       end
     end
-        
   end
+
+  def destroy
+    p "--- in delete ---"
+    p params[:id]
+    p "----"
+    @color = Color.find(params[:id])
+    
+    if(@color.nil?)
+      flash[:error] = "You are trying to destroy an invalid color"
+      redirect_to root_path
+      return
+    end
+    
+    @color.delete
+  end
+
+=begin
   
   def redirect_to_bg_image_url
     @app = App.find(params[:id])
@@ -101,20 +99,6 @@ class ColorsController < ApplicationController
       redirect_to merchant_session_url
       return
     end
-    
-  end
-
-  def destroy
-    #Don't know what all to destroy here
-    @app = App.find(params[:id])
-    
-    if(@app.nil?)
-      flash[:error] = "You are trying to destroy an invalid app"
-      redirect_to merchant_session_url
-      return
-    end
-    
-    @app.delete
     
   end
 =end

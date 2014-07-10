@@ -9,7 +9,9 @@ class Color
   validates_presence_of :code, :image_url
   validates_uniqueness_of :code
   
-  belongs_to :palette
+  has_and_belongs_to_many :palettes   # A color can be a part of many palettes
+                                      # And a palette can have many colors. A N:N association 
+  has_many :products
   
   #TODO: Write validation for code to start with SL and not exceed 5 characters
   class << self

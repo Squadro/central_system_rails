@@ -15,3 +15,37 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+//= require chosen-jquery
+//= require scaffold
+
+
+function doAjaxRequest(url,method,data,dataType,successCallback,errorCallback){
+    if(!errorCallback){
+        errorCallback = handleGenericError
+    }
+	
+    $.ajax({
+        type: method,
+        url: url,
+        processData : true,
+        cache: true,
+        data: data,
+        dataType: dataType,
+        success: successCallback,
+        error: errorCallback
+    });
+
+}
+
+function handleGenericError(xhr, status, reason){
+    try{
+        var data = $.parseJSON(xhr.responseText);
+
+        if(data.error && data.error.type){
+            //Error handle later.
+            console.log(xhr.responseText);
+        }
+    }catch(e){
+        console.log(e);
+    }
+}

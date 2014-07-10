@@ -1,0 +1,64 @@
+<% colors = manage_colors[:colors] %>
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <h3>Manage Laminate Colors</h3>
+    <a href="/colors/new" class="btn btn-primary" style="float: right">New Laminate Color [+]</a>
+    <br/>
+    <br/>
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Color Code
+        </th>
+        <th>
+          Information
+        </th>
+		<th>
+			Image
+		</th>
+		<th>
+			Actions
+		</th>
+      </tr>
+	  <% if colors.present? %>
+      	<% colors.each do |color| %>
+        	<tr class="colorRow">
+          	  <td>
+            	  <%= color.code %>
+          	  </td>
+			  <td>
+				  <%= color.meta %>
+			  </td>
+			  <td>
+	              <img alt="No Image set" style="max-height: 60px; max-width:60px;" src="<%= color.image_url %>"/>
+			  </td>
+          	<td>
+				<div class="btn-group">
+				 <a href="/colors/<%= color.id %>/edit">
+				  <button type="button" class="btn btn-default editColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+			  	</a>
+				  <button type="button" class="btn btn-default deleteColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+				</div>
+          	</td>
+        	</tr>
+      	  <% end %>
+	  <% end %>
+    </table>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  $(".deleteColorButton").click(function(event){
+     var $target = $(event.currentTarget);
+     if(confirm("Are you sure that you want to delete the color?")){
+       var colorRow = $target.closest(".colorRow");
+       var colorId = $target.attr("data-colorId");
+       doAjaxRequest("/colors/"+colorId+".json", "DELETE", null, "json", function(resp){
+         $(colorRow).remove();
+       }, function(xhr, status, reason){
+         alert("Could not delete the palette - " + xhr.responseText)
+       });
+     }
+  })
+</script>

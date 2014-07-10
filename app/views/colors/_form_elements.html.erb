@@ -26,21 +26,21 @@ input[readonly] {
 </style>
 
 	<div class="form-group">
-	  <label class="control-label" for="colorCode">Color Code</label>
+	  <label class="control-label" for="colorCode">Laminate color code</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="color[code]" type="text" id="colorCode" placeholder="Color Code" value="<%= @color.code unless @color.nil? %>"/>
+	    <input required="true" class="form-control" name="color[code]" type="text" id="colorCode" placeholder="SL001" value="<%= @color.code unless @color.nil? %>"/>
 	  </div>
 	</div>
 	
 	<div class="form-group">
-	  <label class="control-label" for="colorMeta">Meta Information</label>
+	  <label class="control-label" for="colorMeta">More information</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Color Meta" value="<%= @color.meta unless @color.nil? %>"/>
+	    <input required="true" class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Not sure why you would need this?" value="<%= @color.meta unless @color.nil? %>"/>
 	  </div>
 	</div>
 	
 	<div class="form-group">
-	  <label class="control-label" for="colorImageUrl">Color Image URL</label>
+	  <label class="control-label" for="colorImageUrl">Color image URL</label>
 	  <div class="controls">
 	    <input type="text" class="form-control" name="color[image_url]" id="colorImageUrl" placeHolder="https://yourwebsite.com/image.ext" value="<%= @color.image_url unless @color.nil?%>"/>
 		<%= button_to_function "Upload", "upload_file()", class: "ok" %>

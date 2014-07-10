@@ -45,9 +45,6 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    p "--- in delete ---"
-    p params[:id]
-    p "----"
     @color = Color.find(params[:id])
     
     if(@color.nil?)

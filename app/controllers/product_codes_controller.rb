@@ -3,63 +3,59 @@ class ProductCodesController < ApplicationController
   #TODO: Authenticate the correct user
   
   def create
-    @palette = ProductCode.add_new(product_code_create_params)
+    @product_code = ProductCode.add_new(product_code_create_params)
     respond_to do |format|
       format.html { redirect_to root_path }
     end
   end
 
   def new
-    @palette = ProductCode.new
+    @product_code = ProductCode.new
   end
-
-=begin
+  
   def edit
-    @app = App.find(params[:id])
+    @product_code = ProductCode.find(params[:id])
 
-    if(@app.nil?)
+    if(@product_code.nil?)
       flash[:error] = "You have requested an invalid data item to edit"
-      redirect_to merchant_session_url
+      redirect_to root_path
       return
     end
-    
-    if @app.merchant_id == current_merchant.id
-      respond_to do |format|
-        format.html
-      end
-    else
-      flash[:error] = "You are unauthorized to access this section"
-      redirect_to merchant_session_url
-    end
-    
   end
   
   def update
-    @app = App.find(params[:id])
+    @product_code = ProductCode.find(params[:id])
     
-    if(@app.nil?)
-      flash[:error] = "You are trying to update an invalid app"
-      redirect_to merchant_session_url
+    if(@product_code.nil?)
+      flash[:error] = "You are trying to update an invalid product code"
+      redirect_to root_path
       return
     end
     
-    if @app.merchant_id == current_merchant.id
-      if @app.update_attributes(app_create_params)
-        redirect_to "/apps/#{@app.id}/edit", :notice => 'Data was successfully updated.'
-      else
-        respond_to do |format|
-          format.html { render :action => "edit" }
-          format.json { render :json => @app.errors, :status => 422}
-        end
-      end
+    if @product_code.update_attributes(product_code_create_params)
+      redirect_to "/product_codes/#{@product_code.id}/edit", :notice => 'Data was successfully updated.'
     else
       respond_to do |format|
-        flash[:error] = "You are unauthorized to access this section"
-        redirect_to merchant_session_url
+        format.html { render :action => "edit" }
+        format.json { render :json => @product_code.errors, :status => 422}
       end
     end
-        
   end
+
+  def destroy
+    @product_code = ProductCode.find(params[:id])
+    
+    if(@product_code.nil?)
+      flash[:error] = "You are trying to destroy an invalid color"
+      redirect_to root_path
+      return
+    end
+    
+    @product_code.delete
+  end
+  
+=begin
+
   
   def redirect_to_bg_image_url
     @app = App.find(params[:id])
@@ -99,20 +95,6 @@ class ProductCodesController < ApplicationController
       redirect_to merchant_session_url
       return
     end
-    
-  end
-
-  def destroy
-    #Don't know what all to destroy here
-    @app = App.find(params[:id])
-    
-    if(@app.nil?)
-      flash[:error] = "You are trying to destroy an invalid app"
-      redirect_to merchant_session_url
-      return
-    end
-    
-    @app.delete
     
   end
 =end

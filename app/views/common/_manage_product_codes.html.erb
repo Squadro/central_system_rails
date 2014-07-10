@@ -13,6 +13,9 @@
         <th>
 		  Description
         </th>
+		<th>
+			Actions
+		</th>
       </tr>
 	  <% if product_codes.present? %>
 	  
@@ -25,15 +28,12 @@
             <%= product_code.description %>
           </td>
           <td>
-            <a href="/product_codes/<%= product_code.id %>/edit">
-              <button title="Edit Product Code" type="button">
-                <span class="glyphicon glyphicon-edit"></span>
-              </button>
-            </a>
-            <button title="Delete Product Code" type="button" class="deleteProductCodeButton"
-                   data-productCodeId="<%= product_code.id %>">
-              <span class="glyphicon glyphicon-remove"></span>
-            </button>
+			<div class="btn-group">
+			 <a href="/product_codes/<%= product_code.id %>/edit">
+			  <button type="button" class="btn btn-default editProductCodeButton" data-ProductCodeId="<%= product_code.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+		  	</a>
+			  <button type="button" class="btn btn-default deleteProductCodeButton" data-ProductCodeId="<%= product_code.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+			</div>
           </td>
         </tr>
 		<% end %>
@@ -46,7 +46,7 @@
 <script type="text/javascript">
   $(".deleteProductCodeButton").click(function(event){
      var $target = $(event.currentTarget);
-     if(confirm("Are you sure that you want to delete the product code?")){
+     if(confirm("Are you sure that you want to delete this Product Code?")){
        var productCodeRow = $target.closest(".productCodeRow");
        var productCodeId = $target.attr("data-productCodeId");
        doAjaxRequest("/product_codes/"+productCodeId+".json", "DELETE", null, "json", function(resp){

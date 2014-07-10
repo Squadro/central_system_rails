@@ -1,0 +1,86 @@
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <h3>Manage Palette</h3>
+    <h4><%= @palette.code %></h4>
+    <input data-paletteId="<%= @palette.id %>" type="button" value="Add New Color" class="btn btn-primary addColorButton" style="float: right;" data-code="" data-meta="" data-imageUrl=""/>
+    <br/><br/>
+    <table class="table table-hover">
+      <tr>
+        <th>
+		  Color Code
+        </th>
+        <th>
+          Meta
+        </th>
+        <th>
+          Image
+        </th>
+        <th>
+          Actions
+        </th>
+      </tr>
+      <% @palette.colors.sort_by(&:code).each do |color| %>
+          <tr class="colorRow">
+            <td class="colorCode">
+              <%= color.code %>
+            </td>
+            <td class="colorMeta">
+              <%= color.meta %>
+            </td>
+            <td class="colorImage">
+              <img alt="No Image set" style="max-height: 60px; max-width:60px;" src="<%= color.image_url %>"/>
+            </td>
+            <td>
+				Delete
+            </td>
+          </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<script type="text/javascript">
+	$(".addColorButton").click(function(event){
+  	  	event.stopPropagation();
+  	  	event.preventDefault();
+  	  	$("#colorAddExisting").modal('show');
+  	  	var $target = $(event.currentTarget);
+  	  	populateAddColorsForm($target, "POST");
+  	  	var options = {
+    		beforeSubmit: function(){
+       		 $("#updateCategoryContainer").mask("Updating");
+   	  	},
+   	 success: function(category, statusText, xhr, $form){
+     	$("#updateCategoryContainer").unmask();
+     	resetEditCategoryForm();
+     	$("#categoryUpdateFormContainer").modal('hide');
+     	window.location.reload();
+   		},
+   	 	error: function(xhr, status, reason){
+     	   $("#updateCategoryContainer").unmask();
+     	  alert("Could not add category: " + xhr.responseText);
+   			}
+  		}
+  		$("#categoryUpdateForm").ajaxForm(options);
+	})
+	
+	
+    function populateAddColorsForm($target, method){
+      var categoryId = $target.attr("data-categoryId");
+      if(method == "PUT"){
+        $("#categoryUpdateForm").attr("action", "/categories/"+categoryId+".json");
+      }else {
+        $("#categoryUpdateForm").attr("action", "/categories.json");
+      }
+     
+      $("#categoryInputMethod").val(method);
+      $("#categoryUpdateCatalogId").val($target.attr("data-catalogId"))
+      $("#categoryUpdateReferenceId").val($target.attr("data-refId"));
+      $("#categoryUpdateName").val(unescape($target.attr("data-name")));
+      $("#categoryUpdateListingOrder").val($target.attr("data-listingOrder"));
+      $("#categoryUpdateDescription").val(unescape($target.attr("data-description")));
+      $("#categoryUpdatePicture").val($target.attr("data-picUrl"));
+      $("#categoryUpdateImageTag").attr("src", $target.attr("data-picUrl"));
+    }
+	
+</script>

@@ -5,7 +5,13 @@ PredictaWebapp::Application.routes.draw do
   resources :colors
   resources :clients
   resources :product_codes
-  resources :palettes
+  resources :palettes do
+    member do
+      get'manage'
+    end
+  end
+  
+  resources :products
   
   post "/uploads" => "uploads#create"
 end

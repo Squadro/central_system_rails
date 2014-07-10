@@ -26,20 +26,16 @@ input[readonly] {
 </style>
 
 	<div class="form-group">
-	  <label class="control-label" for="productCodeName">Product Code Name</label>
+	  <label class="control-label" for="paletteCode">Palette Code</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="product_code[name]" type="text" id="productCodeName" placeholder="BC" value="<%= @product_code.name unless @product_code.nil? %>"/>
+	    <input required="true" class="form-control" name="palette[code]" type="text" id="paletteCode" placeholder="P001" value="<%= @palette.code unless @palette.nil? %>"/>
 	  </div>
 	</div>
 	
-	<div class="form-group">
-	  <label class="control-label" for="productCodeDescription">Product Code Description</label>
-	  <div class="controls">
-	    <input required="true" class="form-control" name="product_code[description]" type="text" id="productCodeDescription" placeholder="Book Case" value="<%= @product_code.description unless @product_code.nil? %>"/>
-	  </div>
-	</div>
-	
-
-	
-
-
+    <select name="palette[colors][]" data-placeholder="Choose laminate colors..." id="chooseFromExistingColors"  multiple style="width:350px;" class='chosen-select' tabindex="4">
+        <% Color.all.to_a.each do |color| %>
+          <option value="<%= color.id %>">
+          		<%= color.code %>
+          </option>
+      <% end %>
+    </select>

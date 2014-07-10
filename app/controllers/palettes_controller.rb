@@ -3,7 +3,7 @@ class PalettesController < ApplicationController
   #TODO: Authenticate the correct user
   
   def create
-    @palette = Palette.add_new(palette_create_params, color_create_params)
+    @palette = Palette.add_new(palette_create_params)
     respond_to do |format|
       format.html { redirect_to root_path }
     end
@@ -12,55 +12,50 @@ class PalettesController < ApplicationController
   def new
     @palette = Palette.new
   end
-
-=begin
+  
   def edit
-    @app = App.find(params[:id])
+    @palette = Palette.find(params[:id])
 
-    if(@app.nil?)
+    if(@palette.nil?)
       flash[:error] = "You have requested an invalid data item to edit"
-      redirect_to merchant_session_url
+      redirect_to root_url
       return
     end
-    
-    if @app.merchant_id == current_merchant.id
-      respond_to do |format|
-        format.html
-      end
-    else
-      flash[:error] = "You are unauthorized to access this section"
-      redirect_to merchant_session_url
-    end
-    
   end
   
   def update
-    @app = App.find(params[:id])
+    @palette = Palette.find(params[:id])
     
-    if(@app.nil?)
-      flash[:error] = "You are trying to update an invalid app"
-      redirect_to merchant_session_url
+    if(@palette.nil?)
+      flash[:error] = "You have requested an invalid data item to edit"
+      redirect_to root_url
       return
     end
     
-    if @app.merchant_id == current_merchant.id
-      if @app.update_attributes(app_create_params)
-        redirect_to "/apps/#{@app.id}/edit", :notice => 'Data was successfully updated.'
-      else
-        respond_to do |format|
-          format.html { render :action => "edit" }
-          format.json { render :json => @app.errors, :status => 422}
-        end
-      end
+    if @palette.update_attributes(palette_create_params)
+      redirect_to "/palettes/#{@palette.id}/edit", :notice => 'Data was successfully updated.'
     else
       respond_to do |format|
-        flash[:error] = "You are unauthorized to access this section"
-        redirect_to merchant_session_url
+        format.html { render :action => "edit" }
+        format.json { render :json => @palette.errors, :status => 422}
       end
     end
-        
   end
   
+  def destroy
+    @palette = Palette.find(params[:id])
+    
+    if(@palette.nil?)
+      flash[:error] = "You are trying to destroy an invalid app"
+      redirect_to root_path
+      return
+    end
+    
+    @palette.delete
+  end
+
+=begin
+
   def redirect_to_bg_image_url
     @app = App.find(params[:id])
     default_image_url = "http://www.webweaver.nu/clipart/img/nature/planets/sun-wearing-sunglasses.png"
@@ -119,11 +114,7 @@ class PalettesController < ApplicationController
   private
 
   def palette_create_params
-    params.require(:palette).permit(:code)
-  end
-  
-  def color_create_params
-    params.require(:palette).permit(:colors => [:code]).require(:colors)
+    params.require(:palette).permit(:code, :colors => [])
   end
   
 end

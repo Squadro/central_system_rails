@@ -13,32 +13,31 @@
         <th>
           Colors
         </th>
+		<th>
+			Actions
+		</th>
       </tr>
 	  <% if palettes.present? %>
       	<% palettes.each do |palette| %>
         	<tr class="paletteRow">
           	  <td>
-            	  <%= palette.name %>
+            	  <%= palette.code %>
           	</td>
+			<td>
+			
+			<% if palette.colors.present? %>
+				<% palette.colors.each do |color| %>
+					<%= color.code + " " %>
+				<% end %>
+			<% end %>
+			</td>
           	<td>
-            	<%= palette.model %>
-          	</td>
-          	<td>
-            	<%= palette.price %>
-          	</td>
-          	<td>
-            	<%= palette.palette %>
-          	</td>
-          	<td>
-            	<a href="/palettes/<%= palette.id %>/edit">
-              	  <button title="Edit Product" type="button">
-                	  <span class="glyphicon glyphicon-edit"></span>
-              	</button>
-            	</a>
-            	<button title="Delete Product" type="button" class="deleteProductButton"
-                	   data-paletteId="<%= palette.id %>">
-              		 <span class="glyphicon glyphicon-remove"></span>
-            	 </button>
+				<div class="btn-group">
+				 <a href="/palettes/<%= palette.id %>/edit">
+				  <button type="button" class="btn btn-default editPaletteButton" data-PaletteId="<%= palette.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+			  	</a>
+				  <button type="button" class="btn btn-default deletePaletteButton" data-PaletteId="<%= palette.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+				</div>
           	</td>
         	</tr>
       	  <% end %>
@@ -49,15 +48,15 @@
 
 
 <script type="text/javascript">
-  $(".deleteProductButton").click(function(event){
+  $(".deletePaletteButton").click(function(event){
      var $target = $(event.currentTarget);
-     if(confirm("Are you sure that you want to delete the palette?")){
+     if(confirm("Are you sure that you want to delete this Palette?")){
        var paletteRow = $target.closest(".paletteRow");
        var paletteId = $target.attr("data-paletteId");
        doAjaxRequest("/palettes/"+paletteId+".json", "DELETE", null, "json", function(resp){
          $(paletteRow).remove();
        }, function(xhr, status, reason){
-         alert("Could not delete the palette - " + xhr.responseText)
+         alert("Could not delete the product code - " + xhr.responseText)
        });
      }
   })

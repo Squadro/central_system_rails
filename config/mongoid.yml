@@ -78,7 +78,7 @@ production:
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - http://agile-cliffs-5888.herokuapp.com:27017
+        - agile-cliffs-5888.herokuapp.com:27017	  
       options:
         # Change the default write concern. (default = { w: 1 })
         # write:

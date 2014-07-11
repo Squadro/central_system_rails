@@ -12,12 +12,12 @@
     <div class="col-xs-6">
       <h2 style="padding-left: 0px;"><%= title %></h2>
 	  
-      <%= form_for(:product_code, :url => {:action => form_action }, :method => form_method, :html=>{"role" => "form"}) do |f| %>
+      <%= form_for(:product, :url => {:action => form_action }, :method => form_method, :html=>{"role" => "form"}) do |f| %>
 
 	  	<% flash.each do |key, value| %>
   	  		<span class="error <%= key %>"><%= value %></span>
 		<% end %>
-		<%= render "form_elements" %>
+		<%= render "form_elements", action: form_action %>
 		<br>
 		<br>
         <div class="actions">

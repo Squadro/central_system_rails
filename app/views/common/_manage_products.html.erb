@@ -8,7 +8,7 @@
     <table class="table table-hover">
       <tr>
         <th>
-          Name
+          Title
         </th>
         <th>
           Model
@@ -17,34 +17,34 @@
 		  Pricing
         </th>
         <th>
-          Palette
+          Palette/SL Code
         </th>
+		<th>
+		  Actions
+		</th>
       </tr>
 	  <% if products.present? %>
       <% products.each do |product| %>
         <tr class="productRow">
           <td>
-            <%= product.name %>
+            <%= product.title if product.present? %>
           </td>
           <td>
-            <%= product.model %>
+            <%= product.model_code if product.present? %>
           </td>
           <td>
-            <%= product.price %>
+            <%= product.pricing if product.present? %>
           </td>
           <td>
-            <%= product.palette %>
+            <%= product.palette_or_color if product.present? %>
           </td>
           <td>
-            <a href="/products/<%= product.id %>/edit">
-              <button title="Edit Product" type="button">
-                <span class="glyphicon glyphicon-edit"></span>
-              </button>
-            </a>
-            <button title="Delete Product" type="button" class="deleteProductButton"
-                   data-productId="<%= product.id %>">
-              <span class="glyphicon glyphicon-remove"></span>
-            </button>
+  			<div class="btn-group">
+  			 <a href="/products/<%= product.id %>/edit">
+  			  <button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+  		  	</a>
+  			  <button type="button" class="btn btn-default deleteProductButton" data-ProductId="<%= product.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+  			</div>
           </td>
         </tr>
 		<% end %>
@@ -52,7 +52,6 @@
     </table>
   </div>
 </div>
-
 
 <script type="text/javascript">
   $(".deleteProductButton").click(function(event){

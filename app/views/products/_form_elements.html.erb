@@ -1,0 +1,210 @@
+<style type="text/css">
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+input[readonly] {
+	background-color: white !important;
+	cursor: text !important;
+}
+</style>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productTitle">Title</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[title]" type="text" id="productTitle" placeholder="Enter an awesome name" value="<%= @product.title unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	<% if action == 'create'%>
+		<div class="form-group">
+		  <label class="control-label" for="productCode">Code</label>
+		  <div class="controls">
+			 <%= select("product", "product_code", ProductCode.all.to_a.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'}) %>
+		  </div>
+		</div>
+	
+		<div class="form-group">
+		  <label class="control-label" for="productModelNumber">Model Number</label>
+		  <div class="controls">
+		    <input required="true" class="form-control" name="product[model_number]" type="text" id="productModelNumber" placeholder="1" value="<%= @product.model_number unless @product.nil? %>"/>
+		  </div>
+		</div>
+
+		<div class="form-group">
+		  <label class="control-label" for="productVariationNumber">Variation</label>
+		  <div class="controls">
+		    <input required="true" class="form-control" name="product[variation_number]" type="text" id="productVariationNumber" placeholder="1" value="<%= @product.variation_number unless @product.nil? %>"/>
+		  </div>
+		</div>
+	
+	
+		<div class="form-group">
+		  <label class="control-label" for="productColorCode">Squadro Laminate Color</label>
+		  <div class="controls">
+			 <%= select("product", "color", Color.all.to_a.collect {|c| [c.code, c.id]}, {include_blank: 'None'})%>
+		  </div>
+		</div>
+    
+		<div class="form-group">
+		  <label class="control-label" for="productPaletteCode">Palette</label>
+		  <div class="controls">
+			 <%= select("product", "palette", Palette.all.to_a.collect {|p| [p.code, p.id]}, {include_blank: 'None'})%>
+		  </div>
+		</div>
+		
+	<% elsif action == 'update'%>
+		<br>
+		<div class="form-group">
+		  <label class="control-label" for="productCode">Code (non-editable)</label>
+		  <div class="controls">
+			  <label> <%= @product.product_code.name unless @product.nil? %> </label>
+		  </div>
+		</div>
+		
+		<div class="form-group">
+		  <label class="control-label" for="productModelNumber">Model Number (non-editable)</label>
+		  <div class="controls">
+			 <label> <%= @product.model_number unless @product.nil? %> </label>
+		  </div>
+		</div>
+
+		<div class="form-group">
+		  <label class="control-label" for="productVariationNumber">Variation (non-editable)</label>
+		  <div class="controls">
+ 			 <label> <%= @product.variation_number unless @product.nil? %> </label>
+		  </div>
+		</div>
+	
+		<div class="form-group">
+		  <label class="control-label" for="productPaletteSLCode">Palette/SL code (non-editable)</label>
+		  <div class="controls">
+  			 <label> <%= @product.palette_or_color unless @product.nil? %> </label>
+		  </div>
+		</div>
+		<br>
+	<% end %>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productPricing">Pricing</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[pricing]" type="text" id="productPricing" placeholder="1" value="<%= @product.pricing unless @product.nil? %>"/>
+	  </div>
+	</div>
+
+	
+	<div class="form-group">
+	  <label class="control-label" for="productShortDescription">Short Description</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[short_description]" type="text" id="productShortDescription" placeholder="A short description" value="<%= @product.short_description unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productLongDescription">Long Description</label>
+	  <div class="controls">
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[long_description]" type="text" id="productLongDescription" placeholder="A very long description of the product" value="<%= @product.long_description unless @product.nil? %>"> </textarea>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productLength">Length</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[length]" type="text" id="productLength" placeholder="Length in mm" value="<%= @product.length unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	
+	<div class="form-group">
+	  <label class="control-label" for="productBreadth">Breadth</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[breadth]" type="text" id="productBreadth" placeholder="Breadth in mm" value="<%= @product.breadth unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productHeight">Height</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[height]" type="text" id="productHeight" placeholder="Height in mm" value="<%= @product.height unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productDepth">Depth</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[depth]" type="text" id="productDepth" placeholder="Breadth in mm" value="<%= @product.depth unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productWeight">Weight</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[weight]" type="text" id="productWeight" placeholder="Weight in kg" value="<%= @product.weight unless @product.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productMaterialType">Material type</label>
+	  <div class="controls">
+		 <%= select("product", "material_type", Product::MATERIAL_TYPES, {include_blank: 'None'}) %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productMountingType">Mounting type</label>
+	  <div class="controls">
+		 <%= select("product", "mounting_type", Product::MOUNTING_TYPES, {include_blank: 'None'}) %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productFinishType">Finish type</label>
+	  <div class="controls">
+		 <%= select("product", "finish_type", Product::FINISH_TYPES, {include_blank: 'None'}) %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productUsageTerms">Usage terms</label>
+	  <div class="controls">
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[usage_terms]" type="text" id="productUsageTerms" placeholder="Enter usage terms" value="<%= @product.usage_terms unless @product.nil? %>"></textarea>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productCleaningOfProduct">Cleaning instructions</label>
+	  <div class="controls">
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[cleaning_of_product]" type="text" id="productCleaningOfProduct" placeholder="Enter cleaning instructions" value="<%= @product.cleaning_of_product unless @product.nil? %>"></textarea>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productWarrantyTerms">Warranty terms</label>
+	  <div class="controls">
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[warranty_terms]" type="text" id="productWarrantyTerms" placeholder="Enter warranty terms" value="<%= @product.warranty_terms unless @product.nil? %>"></textarea>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productWarrantyPeriod">Warranty period</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="product[warranty_period]" type="text" id="productWarrantyPeriod" placeholder="Enter the period in days" value="<%= @product.warranty_period unless @product.nil? %>"/>
+	  </div>
+	</div>
+	

@@ -1,0 +1,37 @@
+	<div class="form-group">
+	  <label class="control-label" for="entryType">Entry Type</label>
+	  <div class="controls">	
+		<select required="true" class="form-control" name="entry[type]" type="text" id="entryType">
+		  <option value="Credit">Credit</option>
+		  <option value="Debit">Debit</option>
+		  <option value="Bill">Bill</option>
+		</select>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="entryPaymentMode">Payment mode</label>
+	  <div class="controls">	
+		<select required="true" class="form-control" name="entry[payment_mode]" type="text" id="entryPaymentMode">
+		  <option value="Cash">Cash</option>
+		  <option value="Cheque">Cheque</option>
+		</select>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="entryAmount">Amount</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="entry[amount]" type="text" id="entryAmount" placeholder="10000" value="<%= @entry.amount unless @entry.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="entryInfo">Extra Info</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="entry[info]" type="text" id="entryInfo" placeholder="Design fees; Cheque# 10232" value="<%= @entry.info unless @entry.nil? %>"/>
+	  </div>
+	</div>
+	
+
+

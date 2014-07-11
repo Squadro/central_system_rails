@@ -9,9 +9,12 @@ class Client
   validates_presence_of :name, :email, :phone_number
   validates_uniqueness_of :email
   
+  has_one :account
+  
   class << self
     def add_new(inputs, data = {})
       client = Client.new(inputs)
+      client.account = Account.new
       client.save!
       client
     end

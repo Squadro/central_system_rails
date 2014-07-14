@@ -1,19 +1,19 @@
 ---
 development:
-  cloud_name: dvfwrvcmi
-  api_key: '895474921774373'
-  api_secret: fwPQtiJY2645FWkIPCERxGed-dI
+  cloud_name: squadro
+  api_key: '752645831579684'
+  api_secret: dDNfwuMYTXYIQ0Y3-If005flsmg
   enhance_image_tag: true
   static_image_support: false
 production:
-  cloud_name: dvfwrvcmi
-  api_key: '895474921774373'
-  api_secret: fwPQtiJY2645FWkIPCERxGed-dI
+  cloud_name: squadro
+  api_key: '752645831579684'
+  api_secret: dDNfwuMYTXYIQ0Y3-If005flsmg
   enhance_image_tag: true
   static_image_support: true
 test:
-  cloud_name: dvfwrvcmi
-  api_key: '895474921774373'
-  api_secret: fwPQtiJY2645FWkIPCERxGed-dI
+  cloud_name: squadro
+  api_key: '752645831579684'
+  api_secret: dDNfwuMYTXYIQ0Y3-If005flsmg
   enhance_image_tag: true
   static_image_support: false

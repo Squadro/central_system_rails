@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
       @palettes = Palette.all.to_a
       @product_codes = ProductCode.all.to_a
       @all_colors = Color.all.to_a
+      ActionController::Base.config.relative_url_root = ''
   end
   
   def auth_token

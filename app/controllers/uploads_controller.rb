@@ -13,7 +13,8 @@ class UploadsController < ApplicationController
     uploaded_file = params[:uploaded_file]
     file_type = params[:file_type]
     if !uploaded_file.nil? && (uploaded_file.respond_to?(:tempfile) and uploaded_file.tempfile.is_a?(Tempfile))  
-      uploaded_url = Cloudinary::Uploader.upload uploaded_file, :tags => "basic_sample"  
+      response = Cloudinary::Uploader.upload uploaded_file, :tags => "basic_sample"  
+      uploaded_url = response["secure_url"]
       new_upload = Upload.new()
       new_upload.type = file_type
       new_upload.url = uploaded_url

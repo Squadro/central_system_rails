@@ -5,13 +5,13 @@ var upload_callback = function(upload_url){
 $(".fileupload").fileupload({
     name:"uploaded_file"
 })
-
 $("#uploadForm").find("input[type=file]").attr("name","uploaded_file");
 
 var uploadOptions = {
  beforeSubmit: function(){
 	 console.log("Before submit");
 	 $("body").mask("Uploading");
+	 //Show throbber here
  	},
  success: function(response, statusText, xhr, $form){
 	 $("body").unmask();

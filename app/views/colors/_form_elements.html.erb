@@ -43,19 +43,25 @@ input[readonly] {
 	  <label class="control-label" for="colorImageUrl">Color image URL</label>
 	  <div class="controls">
 	    <input type="text" class="form-control" name="color[image_url]" id="colorImageUrl" placeHolder="https://yourwebsite.com/image.ext" value="<%= @color.image_url unless @color.nil?%>"/>
-		<%= button_to_function "Upload", "upload_file()", class: "ok" %>
+		<%= link_to "Upload", '#', class: "upload_link" %>
 	  </div>
 	</div>
 		 
 	<script type="text/javascript" charset="utf-8">
+		$(function() {
+	  	  $('.upload_link').click(function() {
+			 upload_file();
+	    	 return false;
+	  		});
+		});
+	
 	  function upload_file()
 	  {
 		 $('#fileUploaderContainer').modal('show');
-	  	 $("#uploadForm").find("input[type=file]").attr("name","uploaded_file"); 
+	  	 $("#uploadForm").find("input[type=file]").attr("name","uploaded_file");
 	  }
   
 	  var upload_callback = function(upload_url){
-		  alert(upload_url);
 		  $('#colorImageUrl').val(upload_url);
 		  $("#fileUploaderContainer").modal("hide");
 	  }

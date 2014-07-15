@@ -33,9 +33,44 @@ input[readonly] {
 	</div>
 	
 	<div class="form-group">
-	  <label class="control-label" for="colorMeta">More information</label>
+	  <label class="control-label" for="colorLaminateBrand">Laminate brand</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Not sure why you would need this?" value="<%= @color.meta unless @color.nil? %>"/>
+	    <input required="true" class="form-control" name="color[laminate_brand]" type="text" id="colorLaminateBrand" placeholder="Merino" value="<%= @color.laminate_brand unless @color.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="colorLaminateCatalogue">Laminate catalogue type</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="color[catalogue_type]" type="text" id="colorLaminateCatalogue" placeholder="Big" value="<%= @color.catalogue_type unless @color.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="colorCataloguePageNo">Catalogue page no</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="color[catalogue_page_no]" type="text" id="colorCataloguePageNo" placeholder="25" value="<%= @color.catalogue_page_no unless @color.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="colorVendorProductCode">Vendor Product Code</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="color[vendor_product_code]" type="text" id="colorVendorProductCode" placeholder="12ADBDC" value="<%= @color.vendor_product_code unless @color.nil? %>"/>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="colorGrainType">Laminate Grain Type</label>
+	  <div class="controls">
+	    <%= select("color", "grain_type", Color::GRAIN_TYPES) %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="colorFinishType">Laminate Finish Type</label>
+	  <div class="controls">
+	    <%= select("color", "finish_type", Color::FINISH_TYPES) %>
 	  </div>
 	</div>
 	
@@ -46,7 +81,14 @@ input[readonly] {
 		<%= link_to "Upload", '#', class: "upload_link" %>
 	  </div>
 	</div>
-		 
+	
+	<div class="form-group">
+	  <label class="control-label" for="colorMeta">More information</label>
+	  <div class="controls">
+	    <input required="true" class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Not sure why you would need this?" value="<%= @color.meta unless @color.nil? %>"/>
+	  </div>
+	</div>
+	
 	<script type="text/javascript" charset="utf-8">
 		$(function() {
 	  	  $('.upload_link').click(function() {

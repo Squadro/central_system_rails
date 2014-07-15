@@ -102,7 +102,7 @@ class ColorsController < ApplicationController
   private
 
   def color_create_params
-    params.require(:color).permit(:code, :meta, :image_url)
+    params.require(:color).permit(:code, :laminate_brand, :catalogue_type, :catalogue_page_no, :vendor_product_code, :grain_type, :finish_type, :meta, :image_url)
   end
   
 end

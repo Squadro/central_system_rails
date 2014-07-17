@@ -13,10 +13,8 @@
       <h2 style="padding-left: 0px;"><%= title %></h2>
 	  
       <%= form_for(:product_code, :url => {:action => form_action }, :method => form_method, :html=>{"role" => "form"}) do |f| %>
-
-	  	<% flash.each do |key, value| %>
-  	  		<span class="error <%= key %>"><%= value %></span>
-		<% end %>
+	  	
+		<%= render(:partial => "common/validation_errors", :object => {:errors => @errors}) %>
 		<%= render "form_elements" %>
 		<br>
 		<br>

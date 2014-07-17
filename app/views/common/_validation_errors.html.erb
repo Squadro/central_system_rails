@@ -1,0 +1,10 @@
+<% errors = validation_errors[:errors] %>
+<% if errors.present? %>
+	<div class="alert alert-error">
+		<ul>
+	  	  <% errors.full_messages.each do |error_msg| %>
+	    	<li><%= error_msg %></li>
+	 	  <% end %>
+		 </ul>
+	</div>
+<% end %>

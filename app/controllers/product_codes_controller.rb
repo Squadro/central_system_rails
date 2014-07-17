@@ -7,6 +7,17 @@ class ProductCodesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path }
     end
+    
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @product_code  = e.document
+    
+    Rails.logger.error "Error creating product code: #{e.message}"
+    
+    respond_to do |format|
+      format.html { render :new, errors: @errors }
+      format.json { render json: {errors: @errors}, status: 422 }
+    end
   end
 
   def new

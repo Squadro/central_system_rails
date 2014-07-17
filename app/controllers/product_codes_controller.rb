@@ -43,13 +43,18 @@ class ProductCodesController < ApplicationController
       return
     end
     
-    if @product_code.update_attributes(product_code_create_params)
-      redirect_to "/product_codes/#{@product_code.id}/edit", :notice => 'Data was successfully updated.'
-    else
-      respond_to do |format|
-        format.html { render :action => "edit" }
-        format.json { render :json => @product_code.errors, :status => 422}
-      end
+    result = @product_code.update_attributes!(product_code_create_params)
+    redirect_to "/product_codes/#{@product_code.id}/edit", :notice => 'Data was successfully updated.'
+    return
+
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @product_code  = e.document
+    Rails.logger.error "Error updating product code: #{e.message}"
+  
+    respond_to do |format|
+      format.html { render :edit, errors: @errors }
+      format.json { render json: {errors: @errors}, status: 422 }
     end
   end
 
@@ -64,7 +69,9 @@ class ProductCodesController < ApplicationController
     
     @product_code.delete
   end
-  
+
+
+
 =begin
 
   

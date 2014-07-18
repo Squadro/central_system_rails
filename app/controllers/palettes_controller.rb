@@ -7,6 +7,17 @@ class PalettesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_path }
     end
+    
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @palette  = e.document
+    
+    Rails.logger.error "Error creating palette: #{e.message}"
+    
+    respond_to do |format|
+      format.html { render :new, errors: @errors }
+      format.json { render json: {errors: @errors}, status: 422 }
+    end
   end
 
   def new
@@ -32,14 +43,19 @@ class PalettesController < ApplicationController
       return
     end
     
-    if @palette.update_attributes(palette_create_params)
-      redirect_to "/palettes/#{@palette.id}/edit", :notice => 'Data was successfully updated.'
-    else
-      respond_to do |format|
-        format.html { render :action => "edit" }
-        format.json { render :json => @palette.errors, :status => 422}
-      end
-    end
+    result = @palette.update_attributes!(palette_create_params)
+    redirect_to "/palettes/#{@palette.id}/edit", :notice => 'Data was successfully updated.'
+    return
+
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @palette  = e.document
+    Rails.logger.error "Error updating palette: #{e.message}"
+  
+    respond_to do |format|
+      format.html { render :edit, errors: @errors }
+      format.json { render json: {errors: @errors}, status: 422 }
+    end     
   end
   
   def destroy

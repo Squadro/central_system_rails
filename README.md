@@ -3,13 +3,19 @@
 To install
 
 Prerequisites 
+
 - You need to have ruby, rails and mongodb installed
 
 Installation
+
 1. Clone the repository to your local machine
+
 2. navigate to the directory and do `bundle install` on terminal
+
 3. `rails s` - this runs the server
+
 4. Create a new tab in the terminal in the same directory run - `mongod`
+
 5. In your browser at `localhost:3000` you should be able to play around with the application
 
 

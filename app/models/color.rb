@@ -4,7 +4,7 @@ class Color
   field :code,                  :type => String   # SL001, SL002 etc
   field :laminate_brand,        :type => String
   field :catalogue_type,        :type => String
-  field :catalogue_page_no,     :type => String
+  field :catalogue_page_no,     :type => Integer
   field :vendor_product_code,   :type => String
   field :grain_type,            :type => String
   field :finish_type,           :type => String
@@ -12,8 +12,9 @@ class Color
   field :image_url,             :type => String
   field :other_data,            :type => Hash,    :default => {}
 
-  validates_presence_of :code, :image_url
-  validates_uniqueness_of :code
+  validates_presence_of :code, :image_url, :laminate_brand, :catalogue_type, :catalogue_page_no, :vendor_product_code
+  validates_uniqueness_of :code, message: "is already taken. Please choose another code"
+  validates_format_of :code, with: /\A[S][L]\d\d\d\Z/, message: 'should be in format SLXXX, where X is a digit. Example SL004'
   
   has_and_belongs_to_many :palettes   # A color can be a part of many palettes
                                       # And a palette can have many colors. A N:N association 
@@ -21,8 +22,11 @@ class Color
   
   FINISH_TYPES = ["MATTE", "GLOSSY", "BUMPY"]
   GRAIN_TYPES  = ["NONE", "HORIZONTAL", "VERTICAL"]
-  
-  #TODO: Write validation for code to start with SL and not exceed 5 characters
+  LAMINATE_BRAND_TYPES = ["B1", "B2", "B3"]
+  CATALOGUE_TYPES = ["CT1", "CT2", "CT3"]
+
+  # TODO: validation - laminate_brand, catalogue_type, grain_type. finish_type - need to be part of the constants    
+
   class << self
     def add_new(inputs, data = {})
       color = Color.new(inputs)

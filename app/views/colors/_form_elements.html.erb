@@ -35,14 +35,14 @@ input[readonly] {
 	<div class="form-group">
 	  <label class="control-label" for="colorLaminateBrand">Laminate brand</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="color[laminate_brand]" type="text" id="colorLaminateBrand" placeholder="Merino" value="<%= @color.laminate_brand unless @color.nil? %>"/>
+    	<%= select("color", "laminate_brand", Color::LAMINATE_BRAND_TYPES) %>
 	  </div>
 	</div>
 	
 	<div class="form-group">
 	  <label class="control-label" for="colorLaminateCatalogue">Laminate catalogue type</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="color[catalogue_type]" type="text" id="colorLaminateCatalogue" placeholder="Big" value="<%= @color.catalogue_type unless @color.nil? %>"/>
+  	    <%= select("color", "catalogue_type", Color::CATALOGUE_TYPES) %>
 	  </div>
 	</div>
 	
@@ -85,7 +85,7 @@ input[readonly] {
 	<div class="form-group">
 	  <label class="control-label" for="colorMeta">More information</label>
 	  <div class="controls">
-	    <input required="true" class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Not sure why you would need this?" value="<%= @color.meta unless @color.nil? %>"/>
+	    <input class="form-control" name="color[meta]" type="text" id="colorMeta" placeholder="Not sure why you would need this?" value="<%= @color.meta unless @color.nil? %>"/>
 	  </div>
 	</div>
 	

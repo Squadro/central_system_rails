@@ -8,7 +8,16 @@ class ColorsController < ApplicationController
       format.html { redirect_to root_path }
     end
     
-    #TODO : Add Validation error handling
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @color  = e.document
+    
+    Rails.logger.error "Error creating color: #{e.message}"
+    
+    respond_to do |format|
+      format.html { render :new, errors: @errors }
+      format.json { render json: {errors: @errors}, status: 422 }
+    end
   end
 
   def new
@@ -34,14 +43,19 @@ class ColorsController < ApplicationController
       return
     end
     
-    if @color.update_attributes(color_create_params)
-      redirect_to "/colors/#{@color.id}/edit", :notice => 'Data was successfully updated.'
-    else
-      respond_to do |format|
-        format.html { render :action => "edit" }
-        format.json { render :json => @color.errors, :status => 422}
-      end
-    end
+    result = @color.update_attributes!(color_create_params)
+    redirect_to "/colors/#{@color.id}/edit", :notice => 'Data was successfully updated.'
+    return
+
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @palette  = e.document
+    Rails.logger.error "Error updating palette: #{e.message}"
+  
+    respond_to do |format|
+      format.html { render :edit, errors: @errors }
+      format.json { render json: {errors: @errors}, status: 422 }
+    end     
   end
 
   def destroy
@@ -56,49 +70,6 @@ class ColorsController < ApplicationController
     @color.delete
   end
 
-=begin
-  
-  def redirect_to_bg_image_url
-    @app = App.find(params[:id])
-    default_image_url = "http://www.webweaver.nu/clipart/img/nature/planets/sun-wearing-sunglasses.png"
-    
-    if(@app.nil?)
-      flash[:error] = "You have requested an invalid app"
-      redirect_to default_image_url
-      return
-    end
-    
-    bg_image_url = @app.other_data["bg_image_url"] unless @app.other_data.nil?
-    redirect_to (bg_image_url.blank? ? default_image_url : bg_image_url )
-  end
-  
-  def notify_devices
-    @app = App.find(params[:id])
-    
-    if(@app.nil?)
-      flash[:error] = "You are trying to notify devices for an invalid app"
-      redirect_to merchant_session_url
-      return
-    end
-    
-    @app.send_bulk_notifications(params)
-    respond_to do |format|
-      format.json { render json: {"msg" => "Delivered to all devices"} }
-      format.html { render text: "Delivered to all devices" }
-    end
-  end
-
-  def new_notification
-    @app = App.find(params[:id])
-    
-    if(@app.nil?)
-      flash[:error] = "You are trying to create notification for an invalid app"
-      redirect_to merchant_session_url
-      return
-    end
-    
-  end
-=end
   private
 
   def color_create_params

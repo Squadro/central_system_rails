@@ -53,16 +53,25 @@ input[readonly] {
 		    <input required="true" class="form-control" name="product[variation_number]" type="text" id="productVariationNumber" placeholder="1" value="<%= @product.variation_number unless @product.nil? %>"/>
 		  </div>
 		</div>
-	
-	
+
+		<br>
 		<div class="form-group">
+  		  <div class="controls">
+			  <div class = "simple">
+				<input type="radio" name="typeChoiceRadioGroup" value="SL" id="radio">SL</input>
+				<input type="radio" name="typeChoiceRadioGroup" value="Palette">Palette</input>
+			  </div>
+			</div>
+		</div>
+		<br>
+		<div class="form-group" id="slColorFormControl">
 		  <label class="control-label" for="productColorCode">Squadro Laminate Color</label>
 		  <div class="controls">
 			 <%= select("product", "color", Color.all.to_a.collect {|c| [c.code, c.id]}, {include_blank: 'None'})%>
 		  </div>
 		</div>
     
-		<div class="form-group">
+		<div class="form-group" id="paletteFormControl">
 		  <label class="control-label" for="productPaletteCode">Palette</label>
 		  <div class="controls">
 			 <%= select("product", "palette", Palette.all.to_a.collect {|p| [p.code, p.id]}, {include_blank: 'None'})%>
@@ -74,14 +83,14 @@ input[readonly] {
 		<div class="form-group">
 		  <label class="control-label" for="productCode">Code (non-editable)</label>
 		  <div class="controls">
-			  <label> <%= @product.product_code.name unless @product.nil? %> </label>
+			  <label><%= @product.product_code.name unless @product.nil? %> </label>
 		  </div>
 		</div>
 		
 		<div class="form-group">
 		  <label class="control-label" for="productModelNumber">Model Number (non-editable)</label>
 		  <div class="controls">
-			 <label> <%= @product.model_number unless @product.nil? %> </label>
+			 <label><%= @product.model_number unless @product.nil? %> </label>
 		  </div>
 		</div>
 
@@ -119,7 +128,7 @@ input[readonly] {
 	<div class="form-group">
 	  <label class="control-label" for="productLongDescription">Long Description</label>
 	  <div class="controls">
-	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[long_description]" type="text" id="productLongDescription" placeholder="A very long description of the product" value="<%= @product.long_description unless @product.nil? %>"> </textarea>
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[long_description]" type="text" id="productLongDescription" placeholder="A very long description of the product"><%= @product.long_description unless @product.nil? %></textarea>
 	  </div>
 	</div>
 	
@@ -183,21 +192,21 @@ input[readonly] {
 	<div class="form-group">
 	  <label class="control-label" for="productUsageTerms">Usage terms</label>
 	  <div class="controls">
-	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[usage_terms]" type="text" id="productUsageTerms" placeholder="Enter usage terms" value="<%= @product.usage_terms unless @product.nil? %>"></textarea>
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[usage_terms]" type="text" id="productUsageTerms" placeholder="Enter usage terms"><%= @product.usage_terms unless @product.nil? %></textarea>
 	  </div>
 	</div>
 	
 	<div class="form-group">
 	  <label class="control-label" for="productCleaningOfProduct">Cleaning instructions</label>
 	  <div class="controls">
-	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[cleaning_of_product]" type="text" id="productCleaningOfProduct" placeholder="Enter cleaning instructions" value="<%= @product.cleaning_of_product unless @product.nil? %>"></textarea>
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[cleaning_of_product]" type="text" id="productCleaningOfProduct" placeholder="Enter cleaning instructions"><%= @product.cleaning_of_product unless @product.nil? %></textarea>
 	  </div>
 	</div>
-	
+
 	<div class="form-group">
 	  <label class="control-label" for="productWarrantyTerms">Warranty terms</label>
 	  <div class="controls">
-	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[warranty_terms]" type="text" id="productWarrantyTerms" placeholder="Enter warranty terms" value="<%= @product.warranty_terms unless @product.nil? %>"></textarea>
+	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[warranty_terms]" type="text" id="productWarrantyTerms" placeholder="Enter warranty terms"><%= @product.warranty_terms unless @product.nil? %></textarea>
 	  </div>
 	</div>
 	
@@ -208,3 +217,76 @@ input[readonly] {
 	  </div>
 	</div>
 	
+	<div class="form-group">
+	  <label class="control-label" for="productLeftAngleRender">Left Angle Render</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[left_angle_render_url]" id="productLeftAngleRender" value="<%= @product.left_angle_render_url unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productLeftAngleRenderUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productRightAngleRender">Right Angle Render</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[right_angle_render_url]" id="productRightAngleRender" value="<%= @product.right_angle_render_url unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productRightAngleRenderUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productFrontRender">Front Render</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[front_render_url]" id="productFrontRender" value="<%= @product.front_render_url unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productFrontRenderUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productDecoratedFrontRender">Decorated Front Render</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[decorated_front_render_url]" id="productDecoratedFrontRender" value="<%= @product.decorated_front_render_url unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productDecoratedFrontRenderUploadLink" %>
+	  </div>
+	</div>
+	
+
+<script>
+
+$(function() {
+	  $('.upload_link').click(function() {
+	  	var cur_element = $(this).attr('id');
+	 	upload_file(cur_element);
+  	 	return false;
+	});
+});
+
+function upload_file(cur_element)
+{
+ $('#fileUploaderContainer').attr('data-currenElement', cur_element);
+ $('#fileUploaderContainer').modal('show');
+ $("#uploadForm").find("input[type=file]").attr("name","uploaded_file");
+}
+
+var upload_callback = function(upload_url, cur_element_id){
+  //Find the upload link and find the prev field which will be the text field; hence set it!
+  $('#'.concat(cur_element_id)).prev().val(upload_url); 
+  $("#fileUploaderContainer").modal("hide");
+}
+
+$(document).ready(function(){
+	$('#slColorFormControl').hide();
+	$('#paletteFormControl').hide();
+	
+    $("input[name=typeChoiceRadioGroup]:radio").change(function(){
+        if ($(this).val() == "SL") {
+			$('#slColorFormControl').show();
+			$('#paletteFormControl').hide();
+		}
+        else {
+			$('#slColorFormControl').hide();
+			$('#paletteFormControl').show();
+        }
+    });
+});
+
+</script>

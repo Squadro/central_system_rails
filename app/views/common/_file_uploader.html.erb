@@ -35,11 +35,13 @@ var uploadOptions = {
  success: function(response, statusText, xhr, $form){
 	 $("body").unmask();
 	 var uploaded_url = response;
+     var cur_element_id = $('#fileUploaderContainer').attr('data-currenElement');
+	 	 
 	 $("#uploadForm")[0].reset();
 	 $(".fileupload").addClass("fileupload-new");
 	 $(".fileupload").removeClass("fileupload-exists");
 	 $(".fileupload-preview").html('<img src="/images/choose.gif"/>');
-	 upload_callback(uploaded_url);
+	 upload_callback(uploaded_url, cur_element_id);
  	},
  error: function(xhr, status, reason){
 	 $("body").unmask();

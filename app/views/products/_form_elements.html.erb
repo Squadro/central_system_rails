@@ -128,7 +128,7 @@ input[readonly] {
 	<div class="form-group">
 	  <label class="control-label" for="productLongDescription">Long Description</label>
 	  <div class="controls">
-	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[long_description]" type="text" id="productLongDescription" placeholder="A very long description of the product"><%= @product.long_description unless @product.nil? %></textarea>
+	    <textarea rows="5" cols="100" class="form-control" name="product[long_description]" type="text" id="productLongDescription" placeholder="A very long description of the product"><%= @product.long_description unless @product.nil? %></textarea>
 	  </div>
 	</div>
 	
@@ -206,7 +206,7 @@ input[readonly] {
 	<div class="form-group">
 	  <label class="control-label" for="productWarrantyTerms">Warranty terms</label>
 	  <div class="controls">
-	    <textarea rows="5" cols="100" required="true" class="form-control" name="product[warranty_terms]" type="text" id="productWarrantyTerms" placeholder="Enter warranty terms"><%= @product.warranty_terms unless @product.nil? %></textarea>
+	    <textarea rows="5" cols="100" class="form-control" name="product[warranty_terms]" type="text" id="productWarrantyTerms" placeholder="Enter warranty terms"><%= @product.warranty_terms unless @product.nil? %></textarea>
 	  </div>
 	</div>
 	

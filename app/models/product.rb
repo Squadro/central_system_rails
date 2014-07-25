@@ -2,7 +2,7 @@ class Product
   include Mongoid::Document
   
   field :title,                 type: String
-  field :model_number,          type: Integer # Auto update this string before_update, before_create
+  field :model_number,          type: Integer
   field :variation_number,      type: Integer # TODO: Should auto update starting from 1
   field :palette_or_color,      type: String  # Place where the product's palette/color
   field :model_code,            type: String
@@ -48,11 +48,14 @@ class Product
   
   
   before_create :set_everything
+  before_update :set_everything
   
   # TODO: Validate all the Allowed stuff
   # TODO: Validate the palette_sl_code to be a palette code or a sl code.
   
-  validates_presence_of :product_code
+  validates_presence_of :product_code, :title, :model_number, :variation_number, message: "should be present"
+  validates_uniqueness_of :model_code, message: "should be unique"
+  validates_numericality_of :warranty_period, :length, :breadth, :height, :depth, :weight, :pricing, :model_number, :variation_number, message: "should be a number"
   
   class << self
     def add_new(inputs, data = {})
@@ -78,7 +81,8 @@ class Product
   end
   
   def set_model_code
-    self.model_code = self.product_code.name + self.model_number.to_s + "." + self.variation_number.to_s + "_" + self.palette_or_color
+    code = ProductCode.find(self.product_code).name
+    self.model_code = code + self.model_number.to_s + "." + self.variation_number.to_s + "_" + self.palette_or_color
   end
   
 end

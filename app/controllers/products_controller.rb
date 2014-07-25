@@ -10,14 +10,14 @@ class ProductsController < ApplicationController
   
   rescue Mongoid::Errors::Validations => e
     @errors = e.document.errors
-    @order  = e.document
+    @product  = e.document
     
     Rails.logger.error "Error creating product : #{e.message}"
     
     respond_to do |format|
+      format.html { render :new, errors: @errors }
       format.json { render json: {errors: @errors}, status: 422 }
-    end
-    
+    end    
   end
 
   def new
@@ -43,13 +43,18 @@ class ProductsController < ApplicationController
       return
     end
     
-    if @product.update_attributes(product_create_params)
-      redirect_to "/products/#{@product.id}/edit", :notice => 'Data was successfully updated.'
-    else
-      respond_to do |format|
-        format.html { render :action => "edit" }
-        format.json { render :json => @product.errors, :status => 422}
-      end
+    result = @product.update_attributes(product_create_params)
+    redirect_to "/products/#{@product.id}/edit", :notice => 'Data was successfully updated.'
+    return
+    
+  rescue Mongoid::Errors::Validations => e
+    @errors = e.document.errors
+    @product  = e.document
+    Rails.logger.error "Error updating product: #{e.message}"
+    
+    respond_to do |format|
+      format.html { render :action => "edit" }
+      format.json { render :json => @product.errors, :status => 422}
     end        
   end
   

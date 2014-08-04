@@ -1,0 +1,18 @@
+<br/><br/><br/>
+<h4>Log in using your Email </h4>
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :method => :post }) do |f| %>
+
+    <% flash.each do |key, value| %>
+      <span class="error <%= key %>"><%= value %></span>
+    <% end %>
+    <div style="clear:both;"></div>
+    <input name="user[email]" id="inputEmail" type="text" placeholder="Email"/>
+    <input name="user[password]" id="inputPassword" type="password" placeholder="Password"/>
+    <input name="user[remember_me]" type="hidden" value="true"/>
+    <footer>
+        <input class="btn btn-secondary btn-m" type="submit" value="Login"/>
+        <!-- <a class="fr" href="/merchants/password/new">Password?</a> -->
+    </footer>
+<% end %>
+<p>Not been here before? <a href="/users/new">Sign up</a></p>
+                    

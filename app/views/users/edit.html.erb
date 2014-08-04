@@ -1,0 +1,22 @@
+<br/><br/><br/>
+<h4>Update your profile </h4>
+
+<%= form_for(:user, :url => {:action => 'update'}, :method => :put) do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :profile_pic %><br />
+    <%= f.text_field :profile_pic %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<br/><br/><br/>

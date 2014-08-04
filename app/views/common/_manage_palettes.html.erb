@@ -2,7 +2,9 @@
 <div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
   <div class="row-fluid">
     <h3>Manage Palettes</h3>
-    <a href="/palettes/new" class="btn btn-primary" style="float: right">New Palette [+]</a>
+ 	<% if can? :create, Palette %>
+		<a href="/palettes/new" class="btn btn-primary" style="float: right">New Palette [+]</a>
+	<% end %>
     <br/>
     <br/>
     <table class="table table-hover">
@@ -34,10 +36,14 @@
 			</td>
           	<td>
 				<div class="btn-group">
-				 <a href="/palettes/<%= palette.id %>/edit">
+     			<% if can? :update, palette %>
+				<a href="/palettes/<%= palette.id %>/edit">
 				  <button type="button" class="btn btn-default editPaletteButton" data-PaletteId="<%= palette.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
 			  	</a>
+				<% end %>
+  				<% if can? :destroy, palette %>
 				  <button type="button" class="btn btn-default deletePaletteButton" data-PaletteId="<%= palette.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+				<% end %>
 				</div>
           	</td>
         	</tr>

@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = 'cf6b3e8e3efdfc15a0a0f21154acb76f5f13d807aadbe9e5fa2fcc8096c28e1a5d112db3fb7bd07d187b70cd249eaed3d1bdb9585d124d3c8255e6ff63487155'
+  config.secret_key = 'cf6b3e8e3efdfc15a0a0f21154acb76f5f13d807aadbe9e5fa2fcc8096c28e1a5d112db3fb7bd07d187b70cd249eaed3d1bdb9585d124d3c8255e6ff63487155'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -126,7 +126,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 20.years
 
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false

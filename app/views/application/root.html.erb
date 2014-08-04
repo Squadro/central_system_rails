@@ -1,4 +1,23 @@
-<%= render(:partial => "common/manage_products" , :object => {:products => @products}) %>
-<%= render(:partial => "common/manage_palettes", :object => {:palettes => @palettes})%>
-<%= render(:partial => "common/manage_product_codes" , :object => {:product_codes => @product_codes}) %>
-<%= render(:partial => "common/manage_colors" , :object => {:colors => @all_colors}) %>
+<% if current_user %>
+	<%= render(:partial => "common/manage_products" , :object => {:products => @products}) %>
+	<%= render(:partial => "common/manage_palettes", :object => {:palettes => @palettes})%>
+	<%= render(:partial => "common/manage_product_codes" , :object => {:product_codes => @product_codes}) %>
+	<%= render(:partial => "common/manage_colors" , :object => {:colors => @all_colors}) %>
+<% else %>
+    <div class="wrapper borderBottom">
+      	<div class="innerContainer blockOne" >
+	  			 <a href="/users/new">
+	  			  <button type="button" class="btn btn-default newUser"> <span class="glyphicon glyphicon-edit"></span>SignUp/Login</button>
+	  		  	</a>
+				  
+			   
+		        <!-- <a href="/users/new"><img src="/images/click.png" alt="click" width="980" height="350" /></a> -->
+		</div>
+	</div>
+<% end %>
+
+
+		    <div class="wrapper gradientBG">
+		      <div class="innerContainer clearFix mainImage"  id="" style="padding: 0px">
+		      </div>
+		    </div>

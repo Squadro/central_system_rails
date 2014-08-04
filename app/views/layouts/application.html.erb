@@ -12,11 +12,16 @@
         <div class="container">
         <a class="brand" href="<%= root_path %>"> <img style = "height: 80px; width: 80px;" src= '/assets/unsquad_logo.png' </a>
           <nav>
-            <ul class="list-inline" style=" float: right;">
+			  <ul class="hmenu">
+				<li><%= link_to('Home |', root_path) %></li>
+			    <%= render 'devise/menu/login_items' %>
+			  </ul>
+            <!-- <ul class="list-inline" style=" float: right;">
               <li><a href="<%= root_path %>">Home</a></li>
               <li><a href="#">Help</a></li>
               <li><a href="#">Sign in</a></li>
             </ul>
+			-->
           </nav>
         </div>
       </div>

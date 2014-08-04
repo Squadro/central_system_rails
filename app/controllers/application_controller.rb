@@ -1,18 +1,19 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  protect_from_forgery  #with: :exception
+  protect_from_forgery  # with: :exception
   
+  #check_authorization   # ensure authorization happens on every action in your application
   rescue_from Exception, with: :handle_exception
   
   def root
-    # TODO: Authenticate/Authorize
-    #if current_merchant
+    if current_user
       @products = Product.all.to_a
       @palettes = Palette.all.to_a
       @product_codes = ProductCode.all.to_a
       @all_colors = Color.all.to_a
       ActionController::Base.config.relative_url_root = ''
+    end
   end
   
   def auth_token

@@ -2,7 +2,9 @@
 <div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
   <div class="row-fluid">
     <h3>Manage Laminate Colors</h3>
-    <a href="/colors/new" class="btn btn-primary" style="float: right">New Laminate Color [+]</a>
+ 	<% if can? :create, Color %>
+   		<a href="/colors/new" class="btn btn-primary" style="float: right">New Laminate Color [+]</a>
+	<% end %>
     <br/>
     <br/>
     <table class="table table-hover">
@@ -34,10 +36,14 @@
 			  </td>
           	<td>
 				<div class="btn-group">
-				 <a href="/colors/<%= color.id %>/edit">
-				  <button type="button" class="btn btn-default editColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-			  	</a>
+      			 <% if can? :update, color %>
+				 	<a href="/colors/<%= color.id %>/edit">
+				  	  <button type="button" class="btn btn-default editColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
+			  		</a>
+				 <% end %>
+	  			 <% if can? :destroy, color %>
 				  <button type="button" class="btn btn-default deleteColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
+				 <% end %>
 				</div>
           	</td>
         	</tr>

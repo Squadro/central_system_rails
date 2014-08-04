@@ -1,9 +1,8 @@
 class UploadsController < ApplicationController
   
-#  before_filter :authenticate_merchant!
- #TODO : Make proper authentication
- 
+  before_filter :authenticate_user!
   before_filter :check_configuration
+  load_and_authorize_resource :except => [:create]
   
   def check_configuration
     render 'configuration_missing' if Cloudinary.config.api_key.blank?

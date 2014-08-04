@@ -30,6 +30,7 @@ GEM
     bcrypt (3.1.7)
     bson (2.2.1)
     builder (3.1.4)
+    cancan (1.6.10)
     capistrano (3.0.1)
       i18n
       rake (>= 10.0.0)
@@ -224,6 +225,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  cancan
   capistrano (~> 3.0.1)
   capistrano-bundler (~> 1.1.1)
   capistrano-rails (~> 1.1.0)

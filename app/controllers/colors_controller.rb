@@ -1,6 +1,7 @@
 class ColorsController < ApplicationController
   
-  #TODO: Authenticate the correct user
+  before_filter :authenticate_user!
+  load_and_authorize_resource :except => [:create]
   
   def create
     @color = Color.add_new(color_create_params)
@@ -21,12 +22,9 @@ class ColorsController < ApplicationController
   end
 
   def new
-    @color = Color.new
   end
 
   def edit
-    @color = Color.find(params[:id])
-
     if(@color.nil?)
       flash[:error] = "You have requested an invalid data item to edit"
       redirect_to root_path
@@ -35,8 +33,6 @@ class ColorsController < ApplicationController
   end
   
   def update
-    @color = Color.find(params[:id])
-    
     if(@color.nil?)
       flash[:error] = "You are trying to update an invalid color"
       redirect_to root_path
@@ -59,8 +55,6 @@ class ColorsController < ApplicationController
   end
 
   def destroy
-    @color = Color.find(params[:id])
-    
     if(@color.nil?)
       flash[:error] = "You are trying to destroy an invalid color"
       redirect_to root_path

@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   
-  #TODO: Authenticate the correct user
+  before_filter :authenticate_user!
+  load_and_authorize_resource :except => [:create]
   
   def create
     @product = Product.add_new(product_create_params)
@@ -21,12 +22,9 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
   end
   
   def edit
-    @product = Product.find(params[:id])
-
     if(@product.nil?)
       flash[:error] = "You have requested an invalid data item to edit"
       redirect_to root_path
@@ -35,8 +33,6 @@ class ProductsController < ApplicationController
   end
   
   def update
-    @product = Product.find(params[:id])
-    
     if(@product.nil?)
       flash[:error] = "You are trying to update an invalid product"
       redirect_to root_path
@@ -59,8 +55,6 @@ class ProductsController < ApplicationController
   end
   
   def destroy
-    @product = Product.find(params[:id])
-    
     if(@product.nil?)
       flash[:error] = "You are trying to destroy an invalid app"
       redirect_to root_path

@@ -1,7 +1,7 @@
 <div class="wrapper gradientBG largePaddingBottom">
 
 	<div class="innerContainer">
-		<h1>Sign up</h1>
+		<h1>New User</h1>
 	</div>
 
 	<div class="innerContainer form" id="login">
@@ -33,7 +33,7 @@
   		</div>
 		
   		<div class="inputGroup">
-  			<label>Role</label><%= f.select(:role, User::ROLES) %> <!-- .map {|r| r.camelize}  -->
+  			<label>Role</label><%= f.select(:role, User::ROLES - ["super_admin"]) %> <!-- .map {|r| r.camelize}  -->
   		</div>
 
   		<div class="inputGroup">
@@ -43,12 +43,12 @@
   			<label>Re-type Password</label><%= f.text_field :password_confirmation, type: "password", class: "baseInput", placeholder: "sameersecret" %>
   		</div>
   		<div class="buttonGroup">
-  			<%= f.button 'Signup for Unsquad', type: "submit", class: "button", value: "Signup for Unsquad" %>
+  			<%= f.button 'Create user for Unsquad', type: "submit", class: "button", value: "Create user for Unsquad" %>
 			
-  			<p class="clearFix">
+  			<!-- <p class="clearFix">
   			<input type="checkbox" checked="checked" class="checkbox" />&nbsp;I agree to Unsquad <a href="#">Terms and Conditions</a>	
   			<br>Already have an account with us? <a href="#" class="toggleSignup">Login</a>
-  			</p>
+  			</p> -->
   		</div>
   		<div class="clearFix"></div>
     <% end %>

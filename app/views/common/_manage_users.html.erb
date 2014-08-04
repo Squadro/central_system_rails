@@ -1,0 +1,39 @@
+<% users = manage_users[:users] %>
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <h3>Manage Users</h3>
+ 	<% if can? :create, User %>
+   		<a href="/users/new" class="btn btn-primary" style="float: right">New User [+]</a>
+	<% end %>
+    <br/>
+    <br/>
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Email
+        </th>
+		<th>
+		  Role
+		</th>
+      </tr>
+	  <% if users.present? %>
+      	<% users.each do |user| %>
+        	<tr class="userRow">
+          	  <td>
+            	  <%= user.name %>
+          	  </td>
+			  <td>
+				  <%= user.email %>
+			  </td>
+			  <td>
+				  <%= user.role %>
+			  </td>
+        	</tr>
+      	  <% end %>
+	  <% end %>
+    </table>
+  </div>
+</div>

@@ -3,21 +3,14 @@
 	<%= render(:partial => "common/manage_palettes", :object => {:palettes => @palettes})%>
 	<%= render(:partial => "common/manage_product_codes" , :object => {:product_codes => @product_codes}) %>
 	<%= render(:partial => "common/manage_colors" , :object => {:colors => @all_colors}) %>
+	<%= render(:partial => "common/manage_users" , :object => {:users => @users}) %>
 <% else %>
+	
     <div class="wrapper borderBottom">
       	<div class="innerContainer blockOne" >
-	  			 <a href="/users/new">
-	  			  <button type="button" class="btn btn-default newUser"> <span class="glyphicon glyphicon-edit"></span>SignUp/Login</button>
+	  			 <a href="<%= new_user_session_path %>">
+	  			  <button type="button" class="btn btn-default newUser"> <span class="glyphicon glyphicon-edit"></span>Click to login</button>
 	  		  	</a>
-				  
-			   
-		        <!-- <a href="/users/new"><img src="/images/click.png" alt="click" width="980" height="350" /></a> -->
 		</div>
 	</div>
 <% end %>
-
-
-		    <div class="wrapper gradientBG">
-		      <div class="innerContainer clearFix mainImage"  id="" style="padding: 0px">
-		      </div>
-		    </div>

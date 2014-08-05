@@ -2,19 +2,25 @@ require "bundler/capistrano"
 require "rvm/capistrano"
 require 'capistrano/sidekiq'
 
-server "http://128.199.132.64/", :web, :app, :db, primary: true
+server "128.199.132.64", :web, :app, :db, primary: true
 
 set :application, "predicta"
-set :user, "anilbhandary"
+set :user, "anil"
 set :port, 8617 #your ssh port
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "https://anilbhandary@bitbucket.org/anilbhandary/predicta.git" #your application repo (for instance git@github.com:user/application.git)
+set :repository, "anilbhandary@bitbucket.org/anilbhandary/predicta.git" #your application repo (for instance git@github.com:user/application.git)
 set :branch, "master"
 
+set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+
+#before 'deploy:setup', 'rvm:install_rvm'  # install/update RVM
+# before 'deploy:setup', 'rvm:install_ruby' # install Ruby and create gemset, OR:
+# before 'deploy:setup', 'rvm:create_gemset' # only create gemset
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true

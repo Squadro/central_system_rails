@@ -1,4 +1,4 @@
-root = "/home/anilbhandary/apps/predicta/current"
+root = "/home/anil/apps/predicta/current"
 working_directory root
 pid "#{root}/tmp/pids/unicorn.pid"
 stderr_path "#{root}/log/unicorn.log"

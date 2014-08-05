@@ -1,6 +1,6 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
-require 'sidekiq/capistrano'
+require 'capistrano/sidekiq'
 
 server "http://128.199.132.64/", :web, :app, :db, primary: true
 

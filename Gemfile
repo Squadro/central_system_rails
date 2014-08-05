@@ -51,6 +51,9 @@ gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) support
 gem 'twitter-bootstrap-rails'
 gem 'chosen-rails'
 gem 'cloudinary'
+gem 'unicorn', '~> 4.8.0'
+gem 'capistrano', '~> 2.15.4'
+gem 'rvm-capistrano', '~> 1.5.1'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"
@@ -61,11 +64,11 @@ group :development, :test do
   gem 'simplecov', '~> 0.8.2'
 end
 
-group :development do
-  gem 'capistrano', '~> 3.0.1'
-  gem 'capistrano-rails', '~> 1.1.0'
-  gem 'capistrano-bundler', '~> 1.1.1'
-end
+#group :development do
+ # gem 'capistrano', '~> 3.0.1'
+ # gem 'capistrano-rails', '~> 1.1.0'
+ # gem 'capistrano-bundler', '~> 1.1.1'
+# end
 
 group :production do
   gem 'pg', '0.15.1'

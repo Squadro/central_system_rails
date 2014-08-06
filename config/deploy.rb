@@ -12,7 +12,10 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "anilbhandary@bitbucket.org/anilbhandary/predicta.git" #your application repo (for instance git@github.com:user/application.git)
+set :repository, "https://anilbhandary@bitbucket.org/anilbhandary/predicta.git" #your application repo (for instance git@github.com:user/application.git)
+set :scm_username, "anilbhandary"
+set :scm_prefer_prompt, :true
+set :scm_verbose, :true
 set :branch, "master"
 
 set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment

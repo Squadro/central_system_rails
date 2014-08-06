@@ -18,6 +18,7 @@ set :scm_prefer_prompt, :true
 set :scm_verbose, :true
 set :branch, "master"
 
+
 set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
 set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
 

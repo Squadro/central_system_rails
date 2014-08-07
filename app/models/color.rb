@@ -22,8 +22,8 @@ class Color
   
   FINISH_TYPES = ["MATTE", "GLOSSY", "BUMPY"]
   GRAIN_TYPES  = ["NONE", "HORIZONTAL", "VERTICAL"]
-  LAMINATE_BRAND_TYPES = ["B1", "B2", "B3"]
-  CATALOGUE_TYPES = ["CT1", "CT2", "CT3"]
+  LAMINATE_BRAND_TYPES = ["Associate", "Airolam", "Bloom"]
+  CATALOGUE_TYPES = ["1mm Associate Woods 2014", "1mm Assoicate Solids 2014", "0.8mm Associate 2014", "1mm Airolam Decor Laminates 2014", "0.8mm Airolite", "1mm Airolam Pearl 2014", "1mm Bloom 2014"]
 
   # TODO: validation - laminate_brand, catalogue_type, grain_type. finish_type - need to be part of the constants    
 

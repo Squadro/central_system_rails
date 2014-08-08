@@ -26,6 +26,10 @@ input[readonly] {
 </style>
 
 	<div class="form-group">
+	  <div style="color:red">
+		  <p> * Please refresh this page once before using. A small bug.
+		  </p>
+	  </div>	
 	  <label class="control-label" for="paletteCode">Palette Code</label>
 	  <div class="controls">
 	    <input required="true" class="form-control" name="palette[code]" type="text" id="paletteCode" placeholder="P001" value="<%= @palette.code unless @palette.nil? %>"/>
@@ -33,7 +37,7 @@ input[readonly] {
 	</div>
 	
     <select name="palette[colors][]" data-placeholder="Choose laminate colors..." id="chooseFromExistingColors"  multiple style="width:350px;" class='chosen-select' tabindex="4">
-        <% Color.all.to_a.each do |color| %>
+        <% Color.all.order_by(:code.asc).to_a.each do |color| %>
           <option value="<%= color.id %>">
           		<%= color.code %>
           </option>

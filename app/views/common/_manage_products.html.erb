@@ -10,10 +10,10 @@
     <table class="table table-hover">
       <tr>
         <th>
-          Title
+          Model
         </th>
         <th>
-          Model
+          Title
         </th>
         <th>
 		  Pricing
@@ -29,10 +29,10 @@
       <% products.each do |product| %>
         <tr class="productRow">
           <td>
-            <%= product.title if product.present? %>
+            <%= product.model_code if product.present? %>
           </td>
           <td>
-            <%= product.model_code if product.present? %>
+            <%= product.title if product.present? %>
           </td>
           <td>
             <%= product.pricing if product.present? %>

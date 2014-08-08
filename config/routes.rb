@@ -1,7 +1,7 @@
 PredictaWebapp::Application.routes.draw do
   root 'application#root'
     
-  devise_for :users
+  devise_for :users, :controllers => {:sessions => 'sessions'}
   resources :users, except: [:index]
   
   #TODO : restrict the actions on each of the resources

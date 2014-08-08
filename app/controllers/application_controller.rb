@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   
   def root
     if current_user
-      @products = Product.all.to_a
-      @palettes = Palette.all.to_a
-      @product_codes = ProductCode.all.to_a
-      @all_colors = Color.all.to_a
-      @users = User.all.to_a
+      @products = Product.all.order_by(:model_code.asc, :title.asc).to_a
+      @palettes = Palette.all.order_by(:code.asc).to_a
+      @product_codes = ProductCode.all.order_by(:name.asc).to_a
+      @all_colors = Color.all.order_by(:code.asc).to_a
+      @users = User.all.order_by(:email.asc).to_a
       ActionController::Base.config.relative_url_root = ''
     end
   end

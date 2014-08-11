@@ -33,14 +33,28 @@ class PalettesController < ApplicationController
   end
   
   def update
+    
     if(@palette.nil?)
       flash[:error] = "You have requested an invalid data item to edit"
       redirect_to root_url
       return
     end
     
-    result = @palette.update_attributes!(palette_create_params)
-    redirect_to "/palettes/#{@palette.id}/edit", :notice => 'Data was successfully updated.'
+    # HACK:TODO: Here we are updating the attributes individually. 
+    # Need to use "update_attributes!(palette_create_params)"
+    @palette.update_attribute(:code, palette_create_params[:code])
+    @palette.colors = []
+    if palette_create_params[:colors].present?
+      colors = Color.find(palette_create_params[:colors]).to_a        
+      if colors.present?
+        colors.each do |color|
+          @palette.colors << color
+          color.save!
+        end
+      end
+    end
+    result = @palette.save!
+    redirect_to root_url #"/palettes/#{@palette.id}/edit", :notice => 'Data was successfully updated.'
     return
 
   rescue Mongoid::Errors::Validations => e

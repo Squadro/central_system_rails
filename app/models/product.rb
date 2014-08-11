@@ -13,7 +13,6 @@ class Product
     
   # Specifications
   field :length,                type: Float
-  field :breadth,               type: Float
   field :height,                type: Float
   field :depth,                 type: Float
   field :weight,                type: Float
@@ -37,7 +36,7 @@ class Product
   
   field :other_data,            type: Hash,    :default => {}
   
-  MATERIAL_TYPES = ["PLY", "MDF", "PTB"]
+  MATERIAL_TYPES = ["PLY", "MDF", "PTB", "PLY+MDF", "PLY+PTB"]
   MOUNTING_TYPES = ["WALL MOUNTING", "FREE STANDING"]
   FINISH_TYPES = ["LAMINATE", "VINEAR", "ACRYLIC"]
   
@@ -55,7 +54,7 @@ class Product
   
   validates_presence_of :product_code, :title, :model_number, :variation_number, message: "should be present"
   validates_uniqueness_of :model_code, message: "should be unique"
-  validates_numericality_of :warranty_period, :length, :breadth, :height, :depth, :weight, :pricing, :model_number, :variation_number, message: "should be a number"
+  validates_numericality_of :warranty_period, :length, :height, :depth, :weight, :pricing, :model_number, :variation_number, message: "should be a number"
   
   class << self
     def add_new(inputs, data = {})

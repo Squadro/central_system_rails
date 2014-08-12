@@ -1,0 +1,187 @@
+<style type="text/css">
+  input[type=text] {
+    width: 90%;
+}
+</style>
+
+<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+  <div class="row-fluid">
+    <div class="col-xs-1">
+      &nbsp;
+    </div>
+    <div class="col-xs-6">
+      <h4 style="padding-left: 0px;"><%= @product.model_code + " | " + @product.title %></h4>
+	
+	 	<div class="form-group">
+	 	  <label class="control-label" for="productTitle">Title</label>
+	 	  <div class="controls">
+			  <%= raw(@product.title)%>
+	 	  </div>
+	 	</div>
+	
+	 		<div class="form-group">
+	 		  <label class="control-label" for="productCode">Code</label>
+	 		  <div class="controls">
+				  <% product_code = ProductCode.find(@product.product_code_id)%>
+				 <%= raw(product_code.name) if product_code.present? %>
+	 		  </div>
+	 		</div>
+			
+	 		<div class="form-group">
+	 		  <label class="control-label" for="productModelNumber">Model Number</label>
+	 		  <div class="controls">
+  			  <%= raw(@product.model_number)%>
+	 		  </div>
+	 		</div>
+
+	 		<div class="form-group">
+	 		  <label class="control-label" for="productVariationNumber">Variation</label>
+	 		  <div class="controls">
+    			  <%= raw(@product.variation_number)%>
+	 		  </div>
+	 		</div>
+			
+	 		<div class="form-group" id="slColorFormControl">
+	 		  <label class="control-label" for="productColorCode">Palette/SL</label>
+	 		  <div class="controls">
+    			  <%= raw(@product.model_code)%>
+	 		  </div>
+	 		</div>
+			
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productPricing">Pricing</label>
+		 	  <div class="controls">
+    			  <%= raw(@product.pricing)%>
+		 	  </div>
+		 	</div>
+			
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productShortDescription">Short Description</label>
+		 	  <div class="controls">
+  			  	<%= raw(@product.short_description)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productLongDescription">Long Description</label>
+		 	  <div class="controls">
+  			  <%= raw(@product.long_description)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productLength">Length</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.length)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productHeight">Height</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.height)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productDepth">Depth</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.depth)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productWeight">Weight</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.weight)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productMaterialType">Material type</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.material_type)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productMountingType">Mounting type</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.mounting_type)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productFinishType">Finish type</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.finish_type)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productUsageTerms">Usage terms</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.usage_terms)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productCleaningOfProduct">Cleaning instructions</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.cleaning_of_product)%>				 
+		 	  </div>
+		 	</div>
+
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productWarrantyTerms">Warranty terms</label>
+		 	  <div class="controls">
+   			  <%= raw(@product.warranty_terms)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productWarrantyPeriod">Warranty period</label>
+		 	  <div class="controls">
+    			  <%= raw(@product.warranty_period)%>
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productLeftAngleRender">Left Angle Render</label>
+		 	  <div class="controls">
+  	              <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.left_angle_render_url %>"/>
+		 	  </div>
+		 	</div>
+			
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productRightAngleRender">Right Angle Render</label>
+		 	  <div class="controls">
+ 	              <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.right_angle_render_url %>"/>				 
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productFrontRender">Front Render</label>
+		 	  <div class="controls">
+	              <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.front_render_url %>"/>				 
+		 	  </div>
+		 	</div>
+	
+		 	<div class="form-group">
+		 	  <label class="control-label" for="productDecoratedFrontRender">Decorated Front Render</label>
+		 	  <div class="controls">
+	              <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.decorated_front_render_url %>"/>				  
+		 	  </div>
+		 	</div>
+
+		<br>
+		<br>
+        <div class="actions">
+  		 <a href="<%= root_path %>">
+  		  <button type="button" class="btn btn-default cancelColorButton">Go back to Home</button>
+  	  	</a>
+        </div>
+    </div>
+
+  </div>
+</div>

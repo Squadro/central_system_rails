@@ -54,9 +54,17 @@ class ProductsController < ApplicationController
     end        
   end
   
+  def show
+    if(@product.nil?)
+      flash[:error] = "You are trying to view an invalid product"
+      redirect_to root_path
+      return
+    end
+  end
+  
   def destroy
     if(@product.nil?)
-      flash[:error] = "You are trying to destroy an invalid app"
+      flash[:error] = "You are trying to destroy an invalid product"
       redirect_to root_path
       return
     end

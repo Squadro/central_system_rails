@@ -37,7 +37,7 @@ class Product
   field :other_data,            type: Hash,    :default => {}
   
   MATERIAL_TYPES = ["PLY", "MDF", "PTB", "PLY+MDF", "PLY+PTB"]
-  MOUNTING_TYPES = ["WALL MOUNTING", "FREE STANDING"]
+  MOUNTING_TYPES = ["WALL MOUNTING", "FREE STANDING", "COMBO MOUNT"]
   FINISH_TYPES = ["LAMINATE", "VINEAR", "ACRYLIC"]
   
   belongs_to :product_code  # You can assume product_code to be Product_category.
@@ -45,20 +45,20 @@ class Product
   belongs_to :color
   belongs_to :palette
   
-  
   before_create :set_everything
   before_update :set_everything
   
   # TODO: Validate all the Allowed stuff
   # TODO: Validate the palette_sl_code to be a palette code or a sl code.
   
-  validates_presence_of :product_code, :title, :model_number, :variation_number, message: "should be present"
+  validates_presence_of :product_code_id, :title, :model_number, :variation_number, message: "should be present"
   validates_uniqueness_of :model_code, message: "should be unique"
   validates_numericality_of :warranty_period, :length, :height, :depth, :weight, :pricing, :model_number, :variation_number, message: "should be a number"
   
   class << self
     def add_new(inputs, data = {})
-      product = Product.new(inputs)
+      product = Product.new(inputs.except(:product_code_id))
+      product.product_code = ProductCode.find(inputs[:product_code_id])
       product.save!
       product
     end

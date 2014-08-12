@@ -32,11 +32,10 @@ input[readonly] {
 	  </div>
 	</div>
 	
-	<% if action == 'create'%>
 		<div class="form-group">
 		  <label class="control-label" for="productCode">Code</label>
 		  <div class="controls">
-			 <%= select("product", "product_code", ProductCode.all.to_a.collect {|p| [ p.name, p.id ] }, {include_blank: 'None'}) %>
+			 <%= select("product", "product_code_id", ProductCode.all.to_a.collect {|p| [ p.name, p.id ] }, {include_blank: true }) %>
 		  </div>
 		</div>
 	
@@ -54,6 +53,7 @@ input[readonly] {
 		  </div>
 		</div>
 
+	<% if action == 'create'%>
 		<br>
 		<div class="form-group">
   		  <div class="controls">
@@ -79,27 +79,6 @@ input[readonly] {
 		</div>
 		
 	<% elsif action == 'update'%>
-		<br>
-		<div class="form-group">
-		  <label class="control-label" for="productCode">Code (non-editable)</label>
-		  <div class="controls">
-			  <label><%= @product.product_code.name unless @product.nil? %> </label>
-		  </div>
-		</div>
-		
-		<div class="form-group">
-		  <label class="control-label" for="productModelNumber">Model Number (non-editable)</label>
-		  <div class="controls">
-			 <label><%= @product.model_number unless @product.nil? %> </label>
-		  </div>
-		</div>
-
-		<div class="form-group">
-		  <label class="control-label" for="productVariationNumber">Variation (non-editable)</label>
-		  <div class="controls">
- 			 <label> <%= @product.variation_number unless @product.nil? %> </label>
-		  </div>
-		</div>
 	
 		<div class="form-group">
 		  <label class="control-label" for="productPaletteSLCode">Palette/SL code (non-editable)</label>

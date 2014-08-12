@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
     end
     
     result = @product.update_attributes(product_create_params)
-    redirect_to "/products/#{@product.id}/edit", :notice => 'Data was successfully updated.'
+    redirect_to root_url, :notice => 'Data was successfully updated.'
     return
     
   rescue Mongoid::Errors::Validations => e
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
   private
 
   def product_create_params
-    params.require(:product).permit(:title, :palette, :variation_number, :model_number, :pricing, :short_description, :long_description, :length, :height, :depth, :weight, :material_type, :mounting_type, :finish_type, :usage_terms, :cleaning_of_product, :warranty_terms, :warranty_period, :left_angle_render_url, :right_angle_render_url, :front_render_url, :decorated_front_render_url, :product_code, :color)
+    params.require(:product).permit(:title, :palette, :variation_number, :model_number, :pricing, :short_description, :long_description, :length, :height, :depth, :weight, :material_type, :mounting_type, :finish_type, :usage_terms, :cleaning_of_product, :warranty_terms, :warranty_period, :left_angle_render_url, :right_angle_render_url, :front_render_url, :decorated_front_render_url, :product_code_id, :color)
   end
   
 end

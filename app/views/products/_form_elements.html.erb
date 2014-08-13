@@ -53,41 +53,43 @@ input[readonly] {
 		  </div>
 		</div>
 
-	<% if action == 'create'%>
 		<br>
+		<% if action == 'update'%>
+	 		<div class="form-group" id="slColor">
+	 		  <label class="control-label" for="productColorCode">Palette/SL</label>
+	 		  <div class="controls">
+    			  <%= @product.model_code %>
+	 		  </div>
+	 		</div>			
+			<p style="color:red"> ** Select one of SL or Palette to edit</p>
+		<% end %>	
+		
 		<div class="form-group">
   		  <div class="controls">
 			  <div class = "simple">
-				<input type="radio" name="typeChoiceRadioGroup" value="SL" id="radio">SL</input>
-				<input type="radio" name="typeChoiceRadioGroup" value="Palette">Palette</input>
+				<input type="radio" class="form-control" name="product[sl_or_palette_radio]" value="SL" id="radio">SL</input>
+				<input type="radio" class="form-control" name="product[sl_or_palette_radio]" value="Palette">Palette</input>
 			  </div>
 			</div>
 		</div>
 		<br>
+	
+	
 		<div class="form-group" id="slColorFormControl">
 		  <label class="control-label" for="productColorCode">Squadro Laminate Color</label>
 		  <div class="controls">
-			 <%= select("product", "color", Color.all.to_a.collect {|c| [c.code, c.id]}, {include_blank: 'None'})%>
+			 <%= select("product", "color_id", Color.all.to_a.collect {|c| [c.code, c.id]}, {include_blank: 'None'})%>
 		  </div>
 		</div>
     
 		<div class="form-group" id="paletteFormControl">
 		  <label class="control-label" for="productPaletteCode">Palette</label>
 		  <div class="controls">
-			 <%= select("product", "palette", Palette.all.to_a.collect {|p| [p.code, p.id]}, {include_blank: 'None'})%>
+			 <%= select("product", "palette_id", Palette.all.to_a.collect {|p| [p.code, p.id]}, {include_blank: 'None'})%>
 		  </div>
 		</div>
 		
-	<% elsif action == 'update'%>
-	
-		<div class="form-group">
-		  <label class="control-label" for="productPaletteSLCode">Palette/SL code (non-editable)</label>
-		  <div class="controls">
-  			 <label> <%= @product.palette_or_color unless @product.nil? %> </label>
-		  </div>
-		</div>
 		<br>
-	<% end %>
 	
 	<div class="form-group">
 	  <label class="control-label" for="productPricing">Pricing</label>
@@ -248,7 +250,7 @@ $(document).ready(function(){
 	$('#slColorFormControl').hide();
 	$('#paletteFormControl').hide();
 	
-    $("input[name=typeChoiceRadioGroup]:radio").change(function(){
+    $('input[name="product[sl_or_palette_radio]"]:radio').change(function(){
         if ($(this).val() == "SL") {
 			$('#slColorFormControl').show();
 			$('#paletteFormControl').hide();

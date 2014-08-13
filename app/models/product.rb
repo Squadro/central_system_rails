@@ -23,6 +23,7 @@ class Product
   # Maintenence
   field :usage_terms,           type: String
   field :cleaning_of_product,   type: String
+  field :sl_or_palette,         type: String  # SL if SL, PALETTE if Palette 
   
   # Warranty
   field :warranty_terms,          type: String
@@ -55,10 +56,33 @@ class Product
   validates_uniqueness_of :model_code, message: "should be unique"
   validates_numericality_of :warranty_period, :length, :height, :depth, :weight, :pricing, :model_number, :variation_number, message: "should be a number"
   
+  def update_product_attributes(safe_params)
+    self.update_attributes(safe_params.except(:product_code_id, :sl_or_palette_radio))
+    self.product_code = ProductCode.find(safe_params[:product_code_id])
+    self.palette = Palette.find(safe_params[:palette_id]) if safe_params[:palette_id].present?
+    self.color = Color.find(safe_params[:color_id]) if safe_params[:color_id].present?
+    
+    if safe_params[:sl_or_palette_radio].present?
+      if safe_params[:sl_or_palette_radio] == 'SL'
+        self.sl_or_palette = 'SL'
+      else
+        self.sl_or_palette = 'Palette'
+      end
+    end      
+    self.save!
+  end
+  
   class << self
     def add_new(inputs, data = {})
-      product = Product.new(inputs.except(:product_code_id))
+      product = Product.new(inputs.except(:product_code_id, :sl_or_palette_radio))
       product.product_code = ProductCode.find(inputs[:product_code_id])
+      product.palette = Palette.find(inputs[:palette_id]) if inputs[:palette_id].present?
+      product.color = Color.find(inputs[:color_id]) if inputs[:color_id].present?
+      if inputs[:sl_or_palette_radio] == 'SL'
+        product.sl_or_palette = 'SL'
+      else
+        product.sl_or_palette = 'Palette'
+      end      
       product.save!
       product
     end
@@ -70,11 +94,11 @@ class Product
     set_palette_or_color 
     set_model_code
   end
-
+    
   def set_palette_or_color
-    if self.palette.present?
+    if self.sl_or_palette == 'Palette'
       self.palette_or_color = self.palette.code
-    elsif self.color.present?
+    else
       self.palette_or_color = self.color.code
     end
   end

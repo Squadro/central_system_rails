@@ -50,6 +50,9 @@
       	  <% end %>
 	  <% end %>
     </table>
+ 	<% if can? :create, Palette %>
+		<a href="/palettes/new" class="btn btn-primary" style="float: right">New Palette [+]</a>
+	<% end %>
   </div>
 </div>
 

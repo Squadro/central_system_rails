@@ -50,6 +50,9 @@
       	  <% end %>
 	  <% end %>
     </table>
+ 	<% if can? :create, Color %>
+   		<a href="/colors/new" class="btn btn-primary" style="float: right">New Laminate Color [+]</a>
+	<% end %>
   </div>
 </div>
 

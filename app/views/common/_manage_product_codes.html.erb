@@ -46,6 +46,9 @@
 		
       <% end %>
     </table>
+ 	<% if can? :create, ProductCode %>
+		<a href="/product_codes/new" class="btn btn-primary" style="float: right">New Product Code [+]</a>
+    <% end %>
   </div>
 </div>
 

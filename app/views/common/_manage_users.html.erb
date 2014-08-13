@@ -35,5 +35,8 @@
       	  <% end %>
 	  <% end %>
     </table>
+ 	<% if can? :create, User %>
+   		<a href="/users/new" class="btn btn-primary" style="float: right">New User [+]</a>
+	<% end %>
   </div>
 </div>

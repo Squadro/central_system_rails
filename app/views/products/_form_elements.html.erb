@@ -222,7 +222,44 @@ input[readonly] {
 	  </div>
 	</div>
 	
-
+	<div class="form-group">
+	  <label class="control-label" for="productInsideViewOne">Inside View 1</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[inside_view_one]" id="productInsideViewOne" value="<%= @product.inside_view_one unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productInsideViewOneUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productInsideViewTwo">Inside View 2</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[inside_view_two]" id="productInsideViewTwo" value="<%= @product.inside_view_two unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productInsideViewTwoUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productDimensionsImageOne">Dimensions Image One</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[dimensions_image_one]" id="productDimensionsImageOne" value="<%= @product.dimensions_image_one unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productDimensionsImageOneUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productDimensionsImageTwo">Dimensions Image Two</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[dimensions_image_two]" id="productDimensionsImageTwo" value="<%= @product.dimensions_image_two unless @product.nil?%>"/>
+		<%= link_to "Upload", '#', class: "upload_link", id: "productDimensionsImageTwoUploadLink" %>
+	  </div>
+	</div>
+	
+	<div class="form-group">
+	  <label class="control-label" for="productSketchupFileEmbedCode">Sketchup File Embed Code</label>
+	  <div class="controls">
+	    <input type="text" class="form-control" name="product[sketchup_file_embed_code]" id="productSketchupFileEmbedCode" value="<%= @product.sketchup_file_embed_code unless @product.nil?%>"/>
+	  </div>
+	</div>
 <script>
 
 $(function() {

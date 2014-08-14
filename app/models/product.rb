@@ -35,6 +35,13 @@ class Product
   field :front_render_url,           type: String
   field :decorated_front_render_url, type: String
   
+  # Images
+  field :inside_view_one,            type: String
+  field :inside_view_two,            type: String
+  field :dimensions_image_one,       type: String
+  field :dimensions_image_two,       type: String
+  field :sketchup_file_embed_code,   type: String
+  
   field :other_data,            type: Hash,    :default => {}
   
   MATERIAL_TYPES = ["PLY", "MDF", "PTB", "PLY+MDF", "PLY+PTB"]

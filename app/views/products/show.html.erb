@@ -11,49 +11,62 @@
     </div>
     <div class="col-xs-6">
       <h4 style="padding-left: 0px;"><%= @product.model_code + " | " + @product.title %></h4>
-	
-	 	<div class="form-group">
-	 	  <label class="control-label" for="productTitle">Title</label>
-	 	  <div class="controls">
-			  <%= raw(@product.title)%>
-	 	  </div>
-	 	</div>
-	
-	 		<div class="form-group">
-	 		  <label class="control-label" for="productCode">Code</label>
-	 		  <div class="controls">
-				  <% product_code = ProductCode.find(@product.product_code_id)%>
-				 <%= raw(product_code.name) if product_code.present? %>
-	 		  </div>
-	 		</div>
-			
-	 		<div class="form-group">
-	 		  <label class="control-label" for="productModelNumber">Model Number</label>
-	 		  <div class="controls">
-  			  <%= raw(@product.model_number)%>
-	 		  </div>
-	 		</div>
-
-	 		<div class="form-group">
-	 		  <label class="control-label" for="productVariationNumber">Variation</label>
-	 		  <div class="controls">
-    			  <%= raw(@product.variation_number)%>
-	 		  </div>
-	 		</div>
-			
-	 		<div class="form-group" id="slColorFormControl">
-	 		  <label class="control-label" for="productColorCode">Palette/SL</label>
-	 		  <div class="controls">
-    			  <%= raw(@product.model_code)%>
-	 		  </div>
-	 		</div>
-			
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productPricing">Pricing</label>
-		 	  <div class="controls">
-    			  <%= raw(@product.pricing)%>
-		 	  </div>
-		 	</div>
+		
+		
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Title
+	        </th>
+	        <th>
+	          Code
+	        </th>
+			<th>
+			  Palette/SL
+			</th>
+			<th>
+			  Model Number
+			</th>
+			<th>
+			  Variation
+			</th>
+	      </tr>
+		    	<tr class="paletteRow">
+	          	  <td><%=raw(@product.title)%></td>
+				<td><% product_code = ProductCode.find(@product.product_code_id)%>
+				 <%= raw(product_code.name) if product_code.present? %></td>
+ 				<td><%= raw(@product.model_code)%></td>
+	          	<td><%= raw(@product.model_number)%></td>
+				<td><%= raw(@product.variation_number)%></td>
+	        	</tr>
+	    </table>
+		
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Pricing
+	        </th>
+	        <th>
+	          Length
+	        </th>
+			<th>
+			  Height
+			</th>
+			<th>
+			  Depth
+			</th>
+			<th>
+			  Weigth
+			</th>
+	      </tr>
+		    <tr class="paletteRow">
+	          	<td><%= raw(@product.pricing)%></td>
+				<td><%= raw(@product.length)%></td>
+	          	<td><%= raw(@product.height)%></td>
+				<td><%= raw(@product.depth)%></td>
+				<td><%= raw(@product.weight)%></td>
+	        </tr>
+	    </table>
 			
 		 	<div class="form-group">
 		 	  <label class="control-label" for="productShortDescription">Short Description</label>
@@ -66,34 +79,6 @@
 		 	  <label class="control-label" for="productLongDescription">Long Description</label>
 		 	  <div class="controls">
   			  <%= raw(@product.long_description)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productLength">Length</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.length)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productHeight">Height</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.height)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productDepth">Depth</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.depth)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productWeight">Weight</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.weight)%>
 		 	  </div>
 		 	</div>
 	
@@ -162,18 +147,10 @@
 				</th>
 		      </tr>
 			    	<tr class="paletteRow">
-		          	  <td>
-						<img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.left_angle_render_url %>"/>
-		          	</td>
-					<td>
-						<img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.right_angle_render_url %>"/>
-					</td>
-		          	<td>
-						 <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.front_render_url %>"/>
-		          	</td>
-					<td>
-	  	              <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.decorated_front_render_url %>"/>
-					</td>
+		          	  <td><%= link_to image_tag(@product.left_angle_render_url, alt: "No Image Set"), @product.left_angle_render_url, :data => { :colorbox => true} %></td>
+					<td><%= link_to image_tag(@product.right_angle_render_url, alt: "No Image Set"), @product.right_angle_render_url, :data => { :colorbox => true} %></td>
+		          	<td><%= link_to image_tag(@product.front_render_url, alt: "No Image Set"), @product.front_render_url, :data => { :colorbox => true} %></td>
+					<td> <%= link_to image_tag(@product.decorated_front_render_url, alt: "No Image Set"), @product.front_render_url, :data => { :colorbox => true} %></td>
 		        	</tr>
 		    </table>
 			
@@ -193,18 +170,10 @@
 				</th>
 		      </tr>
 			    	<tr class="paletteRow">
-		          	  <td>
-						<img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.inside_view_one %>"/>
-		          	</td>
-					<td>
-						<img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.inside_view_two %>"/>
-					</td>
-		          	<td>
-						 <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.dimensions_image_one %>"/>
-		          	</td>
-					<td>
-	  	              <img alt="No Image set" style="max-height: 160px; max-width:160px;" src="<%= @product.dimensions_image_two %>"/>
-					</td>
+		          	  <td> <%= link_to image_tag(@product.inside_view_one, alt: "No Image Set"), @product.inside_view_one, :data => { :colorbox => true} %></td>
+					<td> <%= link_to image_tag(@product.inside_view_two, alt: "No Image Set"), @product.inside_view_two, :data => { :colorbox => true} %></td>
+		          	<td>  <%= link_to image_tag(@product.dimensions_image_one, alt: "No Image Set"), @product.dimensions_image_one, :data => { :colorbox => true} %></td>
+					<td><%= link_to image_tag(@product.dimensions_image_two, alt: "No Image Set"), @product.dimensions_image_two, :data => { :colorbox => true} %></td>
 		        	</tr>
 		    </table>
 			

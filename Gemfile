@@ -55,6 +55,7 @@ gem 'unicorn', '~> 4.8.0'
 gem 'capistrano', '~> 2.15.4'
 gem 'rvm-capistrano', '~> 1.5.1'
 gem "capistrano-sidekiq", '0.3.4'
+gem 'colorbox-rails'
 
 group :development, :test do
   gem "rspec-rails", "~> 2.14.0"

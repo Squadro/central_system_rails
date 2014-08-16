@@ -40,7 +40,7 @@ class Product
   field :inside_view_two,            type: String
   field :dimensions_image_one,       type: String
   field :dimensions_image_two,       type: String
-  field :sketchup_file_embed_code,   type: String
+  field :sketchup_file_url,   type: String  #
   
   field :other_data,            type: Hash,    :default => {}
   

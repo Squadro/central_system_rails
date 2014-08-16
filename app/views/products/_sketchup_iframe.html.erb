@@ -1,2 +1,2 @@
 <% product = sketchup_iframe[:product] %>
-<%= product.sketchup_file_embed_code %>
+<%= tag("iframe", {src: product.sketchup_file_url, width: 400, height: 300}, false, false)  %>

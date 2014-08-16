@@ -58,6 +58,9 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    colorbox-rails (0.1.2)
+      jquery-rails
+      rails (>= 3.1.1)
     commonjs (0.2.7)
     compass (0.12.6)
       chunky_png (~> 1.2)
@@ -247,6 +250,7 @@ DEPENDENCIES
   chosen-rails
   cloudinary
   coffee-rails (~> 4.0.0)
+  colorbox-rails
   database_cleaner (~> 1.2.0)
   devise (~> 3.2.2)
   fabrication (~> 2.9.3)

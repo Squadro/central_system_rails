@@ -13,6 +13,7 @@
 //= require jquery
 //= require colorbox-rails
 //= require jquery_ujs
+//= require scriptbreaker-multiple-accordion-1
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .

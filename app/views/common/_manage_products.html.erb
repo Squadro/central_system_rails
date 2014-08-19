@@ -1,3 +1,81 @@
+<style type="text/css">
+	.topnav {
+    	width: 850px;
+    	padding: 40px 28px 25px 0;
+    	font-family: "CenturyGothicRegular", "Century Gothic", Arial, Helvetica, sans-serif;
+	}
+
+	ul.topnav {
+    	padding: 0;
+    	margin: 0;
+    	font-size: 1em;
+    	line-height: 0.5em;
+    	list-style: none;
+	}
+
+	ul.topnav li {}
+
+	ul.topnav li a {
+    	line-height: 10px;
+    	font-size: 21px;
+    	padding: 10px 5px;
+    	color: #000;
+    	display: block;
+    	text-decoration: none;
+    	font-weight: bolder;
+	}
+
+	ul.topnav li a:hover {
+    	background-color:#675C7C;
+    	color:white;
+	}
+
+	ul.topnav ul {
+    	margin: 0;
+    	padding: 0;
+    	display: none;
+	}
+
+	ul.topnav ul li {
+    	margin: 0;
+    	padding: 0;
+    	clear: both;
+	}
+
+	ul.topnav ul li a {
+    	padding-left: 20px;
+    	font-size: 20px;
+    	font-weight: normal;
+	}
+
+	ul.topnav ul li a:hover {
+    	background-color:#D3C99C;
+    	color:#675C7C;
+	}
+
+	ul.topnav ul ul li a {
+    	color:silver;
+    	padding-left: 40px;
+	}
+
+	ul.topnav ul ul li a:hover {
+    	background-color:#D3CEB8;
+    	color:#675C7C;
+	}
+	
+	#outer
+	{
+	    width:100%;
+	    text-align: center;
+	}
+	.inner
+	{
+	    display: inline-block;
+	}
+
+	
+</style>
+
 <% products = manage_products[:products] %>
 <div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
   <div class="row-fluid">
@@ -7,61 +85,64 @@
 	<% end %>
     <br/>
     <br/>
-    <table class="table table-hover">
-      <tr>
-        <th>
+      <h3>
+        <span>
           Model
-        </th>
-        <th>
+        </span>
+		___
+        <span>
           Title
-        </th>
-        <th>
+        </span>
+		___
+        <span>
 		  Pricing
-        </th>
-        <th>
-          Palette/SL Code
-        </th>
-		<th>
-		  Actions
-		</th>
-      </tr>
+        </span>
+		___
+        <span>
+          Palette/SL
+        </span>
+      </h3>
+	  <% current_product_code_id = nil %>
 	  <% if products.present? %>
-      <% products.each do |product| %>
-        <tr class="productRow">
-          <td>
-            <%= product.model_code if product.present? %>
-          </td>
-          <td>
-            <%= product.title if product.present? %>
-          </td>
-          <td>
-            <%= product.pricing if product.present? %>
-          </td>
-          <td>
-            <%= product.palette_or_color if product.present? %>
-          </td>
-          <td>
-  			<div class="btn-group">
-	   			 <% if can? :read, product %>
-	  			 	<a href="/products/<%= product.id %>">
-	  			  	<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>"> <span class="glyphicon glyphicon-edit"></span>View</button>
-	  		  		</a>
-				<% end %>
+      	<% products.each do |product| %>
+	  		<% if current_product_code_id == nil %>
+				<% current_product_code_id = product.product_code_id.to_s %>
 				
-   			 <% if can? :update, product %>
-  			 	<a href="/products/<%= product.id %>/edit">
-  			  	<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-  		  		</a>
+				<ul class="topnav" style="margin-left:30px;">
+					<li> <a href="#"><%= ProductCode.find(current_product_code_id).name %>
+						<ul style="margin-left:30px;">
 			<% end %>
-  			 <% if can? :destroy, product %>
-  			  <button type="button" class="btn btn-default deleteProductButton" data-ProductId="<%= product.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-  			 <% end %> 
-  			</div>
-          </td>
-        </tr>
-		<% end %>
-      <% end %>
-    </table>
+			<% if current_product_code_id != product.product_code_id.to_s %>
+				<% current_product_code_id = product.product_code_id.to_s %>
+						</ul>
+					</a></li>
+					<li><a href="#"><%= ProductCode.find(current_product_code_id).name %>
+						<ul style="margin-left:30px;">
+			<% end %>
+			<li><a href="#">
+	            <%= product.model_code if product.present? %>___<%= product.title if product.present? %>___<%= product.pricing if product.present? %>___<%= product.palette_or_color if product.present? %>
+	    			<span><div class="btn-group" id="outer" >
+	  	   			 <% if can? :read, product %>
+	  	  			 	<a href="/products/<%= product.id %>" class="inner">
+	  	  			  	<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>">View</button>
+	  	  		  		</a>
+	  				<% end %>
+	     			 <% if can? :update, product %>
+	    			 	<a href="/products/<%= product.id %>/edit" class="inner">
+	    			  	<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>">Edit</button>
+	    		  		</a>
+	  			<% end %>
+	    			 <% if can? :destroy, product %>
+	    			  <button type="button" class="btn btn-default deleteProductButton inner" data-ProductId="<%= product.id %>">Delete</button>
+	    			 <% end %> 
+	    			</div></span>
+			</a></li>
+			
+		<% end # end of for loop %>
+				</ul>
+			</a></li>
+		</ul>
+      <% end # end of if %>
  	<% if can? :create, Product %>
 		<a href="/products/new" class="btn btn-primary" style="float: right">New Product [+]</a>
 	<% end %>
@@ -69,6 +150,17 @@
 </div>
 
 <script type="text/javascript">
+ 	
+$(document).ready(function() {
+//use the scriptbreaker.com multiple accordion menu
+    $(".topnav").accordion({
+        accordion:true,
+        speed: 300,
+        closedSign: '[+]',
+        openedSign: '[-]'
+    });
+});
+
   $(".deleteProductButton").click(function(event){
      var $target = $(event.currentTarget);
      if(confirm("Are you sure that you want to delete the product?")){

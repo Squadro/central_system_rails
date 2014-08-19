@@ -105,7 +105,7 @@ class Product
   def set_palette_or_color
     if self.sl_or_palette == 'Palette'
       self.palette_or_color = self.palette.code
-    else
+    elsif self.sl_or_palette == 'SL'
       self.palette_or_color = self.color.code
     end
   end

@@ -31,8 +31,8 @@ class ApplicationController < ActionController::Base
     
     unless performed?
       respond_to do |format|
-        format.html { render text: "Something went wrong. We are looking into it", status: 500 }
-        format.json { render json: {msg: "Something went wrong. We are looking into it"}, status: 500 }
+        format.html { render text: "Something went wrong. We are looking into it. Error details: #{e.class}, #{e.message}, #{e.backtrace.slice(0, stack_depth).join("\n")}", status: 500 }
+        format.json { render json: {msg: "Something went wrong. We are looking into it. Error details: #{e.class}, #{e.message}, #{e.backtrace.slice(0, stack_depth).join("\n")}"}, status: 500 }
       end
     end
   end

@@ -1,55 +1,60 @@
 <% palettes = manage_palettes[:palettes] %>
-<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+<div class="container-fluid">
   <div class="row-fluid">
-    <h3>Manage Palettes</h3>
+    <h4 class="sub-header"name="manage-palettes">Manage Palettes</h4>
  	<% if can? :create, Palette %>
-		<a href="/palettes/new" class="btn btn-primary" style="float: right">New Palette [+]</a>
+		<a href="/palettes/new" class="btn btn-primary new-create">New Palette [+]</a>
 	<% end %>
     <br/>
     <br/>
-    <table class="table table-hover">
-      <tr>
-        <th>
-          Code
-        </th>
-        <th>
-          Colors
-        </th>
-		<th>
-			Actions
-		</th>
-      </tr>
-	  <% if palettes.present? %>
-      	<% palettes.each do |palette| %>
-        	<tr class="paletteRow">
-          	  <td>
-            	  <%= palette.code %>
-          	</td>
-			<td>
+	<div class="table-responsive">
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Code
+	        </th>
+	        <th>
+	          Colors
+	        </th>
+			<th>
+				Actions
+			</th>
+	      </tr>
+		  <% if palettes.present? %>
+	      	<% palettes.each do |palette| %>
+	        	<tr class="paletteRow">
+	          	  <td>
+	            	  <%= palette.code %>
+	          	</td>
+				<td>
 			
-			<% if palette.colors.present? %>
-				<% palette.colors.each do |color| %>
-					<%= color.code + " " %>
-  	                <img alt="No Image set" style="max-height: 60px; max-width:60px;" src="<%= color.image_url %>"/>	
+				<% if palette.colors.present? %>
+					<% palette.colors.each do |color| %>
+						<%= color.code + " " %>
+	  	                <img alt="Image" class="small-image" src="<%= color.image_url %>"/>	
+					<% end %>
 				<% end %>
-			<% end %>
-			</td>
-          	<td>
-				<div class="btn-group">
-     			<% if can? :update, palette %>
-				<a href="/palettes/<%= palette.id %>/edit">
-				  <button type="button" class="btn btn-default editPaletteButton" data-PaletteId="<%= palette.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-			  	</a>
-				<% end %>
-  				<% if can? :destroy, palette %>
-				  <button type="button" class="btn btn-default deletePaletteButton" data-PaletteId="<%= palette.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-				<% end %>
-				</div>
-          	</td>
-        	</tr>
-      	  <% end %>
-	  <% end %>
-    </table>
+				</td>
+	          	<td>
+	     			<% if can? :update, palette %>
+					<a href="/palettes/<%= palette.id %>/edit">
+					  <button type="button" class="btn btn-default editPaletteButton" data-PaletteId="<%= palette.id %>"> 
+						  <span class="glyphicon glyphicon-edit"></span>
+					  </button>
+				  	</a>
+					<% end %>
+	  				<% if can? :destroy, palette %>
+					  <button type="button" class="btn btn-default deletePaletteButton" data-PaletteId="<%= palette.id %>"> 
+						  <span class="glyphicon glyphicon-remove"></span>
+					  </button>
+					<% end %>
+	          	</td>
+	        	</tr>
+	      	  <% end %>
+		  <% end %>
+	    </table>
+	</div>
+
  	<% if can? :create, Palette %>
 		<a href="/palettes/new" class="btn btn-primary" style="float: right">New Palette [+]</a>
 	<% end %>

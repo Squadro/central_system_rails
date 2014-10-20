@@ -1,15 +1,25 @@
 <% if current_user %>
-	<%= render(:partial => "common/manage_products" , :object => {:products => @products}) %>
-	<%= render(:partial => "common/manage_palettes", :object => {:palettes => @palettes})%>
-	<%= render(:partial => "common/manage_product_codes" , :object => {:product_codes => @product_codes}) %>
-	<%= render(:partial => "common/manage_colors" , :object => {:colors => @all_colors}) %>
-	<%= render(:partial => "common/manage_users" , :object => {:users => @users}) %>
+ 	<section class="root-section">
+		<%= render(:partial => "common/manage_products" , :object => {:products => @products}) %>
+	</section>
+ 	<section class="root-section">
+		<%= render(:partial => "common/manage_palettes", :object => {:palettes => @palettes})%>
+	</section>
+ 	<section class="root-section">
+		<%= render(:partial => "common/manage_product_codes" , :object => {:product_codes => @product_codes}) %>
+	</section>
+	 <section class="root-section">
+		 <%= render(:partial => "common/manage_colors" , :object => {:colors => @all_colors}) %>
+	 </section>
+	 <section class="root-section">
+		 <%= render(:partial => "common/manage_users" , :object => {:users => @users}) %>
+	 </section>
 <% else %>
 	
     <div class="wrapper borderBottom">
       	<div class="innerContainer blockOne" >
 	  			 <a href="<%= new_user_session_path %>">
-	  			  <button type="button" class="btn btn-default newUser"> <span class="glyphicon glyphicon-edit"></span>Click to login</button>
+	  			  <button type="button" class="btn btn-default newUser">Click to login</button>
 	  		  	</a>
 		</div>
 	</div>

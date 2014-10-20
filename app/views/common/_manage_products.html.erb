@@ -13,11 +13,13 @@
     	list-style: none;
 	}
 
-	ul.topnav li {}
+	ul.topnav li {
+    	list-style: none;
+	}
 
 	ul.topnav li a {
     	line-height: 10px;
-    	font-size: 21px;
+    	font-size: 14px;
     	padding: 10px 5px;
     	color: #000;
     	display: block;
@@ -44,7 +46,7 @@
 
 	ul.topnav ul li a {
     	padding-left: 20px;
-    	font-size: 20px;
+    	font-size: 13px;
     	font-weight: normal;
 	}
 
@@ -72,79 +74,67 @@
 	{
 	    display: inline-block;
 	}
-
+	
+	.crud_buttons {
+		float: right;
+	}
 	
 </style>
 
 <% products = manage_products[:products] %>
-<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+<div class="container-fluid">
   <div class="row-fluid">
-    <h3>Manage Products</h3>
+    <h4 class="sub-header" name="manage-products">Manage Products</h4>
  	<% if can? :create, Product %>
-		<a href="/products/new" class="btn btn-primary" style="float: right">New Product [+]</a>
+		<a href="/products/new" class="btn btn-primary new-create">New Product [+]</a>
 	<% end %>
     <br/>
     <br/>
-      <h3>
-        <span>
-          Model
-        </span>
-		___
-        <span>
-          Title
-        </span>
-		___
-        <span>
-		  Pricing
-        </span>
-		___
-        <span>
-          Palette/SL
-        </span>
-      </h3>
-	  <% current_product_code_id = nil %>
-	  <% if products.present? %>
-      	<% products.each do |product| %>
+	
+	<% current_product_code_id = nil %>
+	<% if products.present? %>
+    	<% products.each do |product| %>
 	  		<% if current_product_code_id == nil %>
 				<% current_product_code_id = product.product_code_id.to_s %>
-				
-				<ul class="topnav" style="margin-left:30px;">
-					<li> <a href="#"><%= ProductCode.find(current_product_code_id).name %>
-						<ul style="margin-left:30px;">
+					<ul class="topnav" style="margin-left:30px;">
+						<li> 
+							<a href="#"><%= ProductCode.find(current_product_code_id).name + "(" + Product.where(product_code: current_product_code_id).count.to_s + ") "%></a>
+								<ul style="margin-left:30px;">
 			<% end %>
+			
 			<% if current_product_code_id != product.product_code_id.to_s %>
 				<% current_product_code_id = product.product_code_id.to_s %>
-						</ul>
-					</a></li>
-					<li><a href="#"><%= ProductCode.find(current_product_code_id).name %>
+					</ul>
+				</li>
+					<li><a href="#"><%= ProductCode.find(current_product_code_id).name + "(" + Product.where(product_code: current_product_code_id).count.to_s + ") " %></a>
 						<ul style="margin-left:30px;">
 			<% end %>
-			<li><a href="#">
-	            <%= product.model_code if product.present? %>___<%= product.title if product.present? %>___<%= product.pricing if product.present? %>___<%= product.palette_or_color if product.present? %>
-	    			<span><div class="btn-group" id="outer" >
+			<li>
+				<a href="#">
+					<%= product.model_code if product.present? %> -- <%= product.title if product.present? %> -- <%= product.pricing if product.present? %> -- <%= product.palette_or_color if product.present? %>
+					<div class="crud_buttons">
 	  	   			 <% if can? :read, product %>
-	  	  			 	<a href="/products/<%= product.id %>" class="inner">
-	  	  			  	<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>">View</button>
-	  	  		  		</a>
+	  	  			  		<button type="button" class="btn btn-default viewProductButton" data-ProductId="<%= product.id %>">View</button>
+						
 	  				<% end %>
 	     			 <% if can? :update, product %>
-	    			 	<a href="/products/<%= product.id %>/edit" class="inner">
-	    			  	<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>">Edit</button>
-	    		  		</a>
+	    			  		<button type="button" class="btn btn-default editProductButton" data-ProductId="<%= product.id %>">Edit</button>
 	  			<% end %>
 	    			 <% if can? :destroy, product %>
-	    			  <button type="button" class="btn btn-default deleteProductButton inner" data-ProductId="<%= product.id %>">Delete</button>
+	    			  <button type="button" class="btn btn-default deleteProductButton list-item" data-ProductId="<%= product.id %>">Delete</button>
 	    			 <% end %> 
-	    			</div></span>
-			</a></li>
+				 </div>
+				 </a>
+			</li>
 			
 		<% end # end of for loop %>
 				</ul>
-			</a></li>
+			</li>
 		</ul>
       <% end # end of if %>
+	  <br>
  	<% if can? :create, Product %>
-		<a href="/products/new" class="btn btn-primary" style="float: right">New Product [+]</a>
+		<a href="/products/new" class="btn btn-primary new-create">New Product [+]</a>
 	<% end %>
   </div>
 </div>
@@ -159,6 +149,19 @@ $(document).ready(function() {
         closedSign: '[+]',
         openedSign: '[-]'
     });
+});
+
+	$('.viewProductButton').click(function(event) {
+    	var $target = $(event.currentTarget);
+        var productId = $target.attr("data-productId");
+	    window.location = "/products/" + productId;
+	});
+
+$('.editProductButton').click(function(event) {
+    var $target = $(event.currentTarget);
+    var productId = $target.attr("data-productId");
+    window.location = "/products/" + productId + "/edit";
+	
 });
 
   $(".deleteProductButton").click(function(event){

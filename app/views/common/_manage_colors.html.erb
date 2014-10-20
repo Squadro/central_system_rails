@@ -1,57 +1,61 @@
 <% colors = manage_colors[:colors] %>
-<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+<div class="container-fluid">
   <div class="row-fluid">
-    <h3>Manage Laminate Colors</h3>
+    <h4 class="sub-header" name="manage-colors">Manage Laminate Colors</h3>
  	<% if can? :create, Color %>
-   		<a href="/colors/new" class="btn btn-primary" style="float: right">New Laminate Color [+]</a>
+   		<a href="/colors/new" class="btn btn-primary new-create">New Color [+]</a>
 	<% end %>
     <br/>
     <br/>
-    <table class="table table-hover">
-      <tr>
-        <th>
-          Color Code
-        </th>
-        <th>
-          Information
-        </th>
-		<th>
-			Image
-		</th>
-		<th>
-			Actions
-		</th>
-      </tr>
-	  <% if colors.present? %>
-      	<% colors.each do |color| %>
-        	<tr class="colorRow">
-          	  <td>
-            	  <%= color.code %>
-          	  </td>
-			  <td>
-				  <%= color.meta %>
-			  </td>
-			  <td>
-	              <img alt="No Image set" style="max-height: 60px; max-width:60px;" src="<%= color.image_url %>"/>
-			  </td>
-          	<td>
-				<div class="btn-group">
-      			 <% if can? :update, color %>
-				 	<a href="/colors/<%= color.id %>/edit">
-				  	  <button type="button" class="btn btn-default editColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-			  		</a>
-				 <% end %>
-	  			 <% if can? :destroy, color %>
-				  <button type="button" class="btn btn-default deleteColorButton" data-colorId="<%= color.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-				 <% end %>
-				</div>
-          	</td>
-        	</tr>
-      	  <% end %>
-	  <% end %>
-    </table>
+	<div class="table-responsive">
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Color Code
+	        </th>
+	        <th>
+	          Information
+	        </th>
+			<th>
+				Image
+			</th>
+			<th>
+				Actions
+			</th>
+	      </tr>
+		  <% if colors.present? %>
+	      	<% colors.each do |color| %>
+	        	<tr class="colorRow">
+	          	  <td>
+	            	  <%= color.code %>
+	          	  </td>
+				  <td>
+					  <%= color.meta %>
+				  </td>
+				  <td>
+		              <img alt="Image" class="small-image" src="<%= color.image_url %>"/>
+				  </td>
+	          	<td>
+	      			 <% if can? :update, color %>
+					 	<a href="/colors/<%= color.id %>/edit">
+							<button type="button" title="Edit" class="btn btn-default editColorButton" data-colorId="<%= color.id %>">
+								<span class="glyphicon glyphicon-edit"></span>
+							</button>
+						</a>
+					 <% end %>
+		  			 <% if can? :destroy, color %>
+					  	<button type="button" title="Remove" class="btn btn-default deleteColorButton" data-colorId="<%= color.id %>">
+							<span class="glyphicon glyphicon-remove"></span>
+						</button>
+					 <% end %>
+	          	</td>
+	        	</tr>
+	      	  <% end %>
+		  <% end %>
+	    </table>
+	</div>
  	<% if can? :create, Color %>
-   		<a href="/colors/new" class="btn btn-primary" style="float: right">New Laminate Color [+]</a>
+   		<a href="/colors/new" class="btn btn-primary new-create">New Color [+]</a>
 	<% end %>
   </div>
 </div>

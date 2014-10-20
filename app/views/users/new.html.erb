@@ -1,28 +1,12 @@
 <div class="wrapper gradientBG largePaddingBottom">
 
 	<div class="innerContainer">
-		<h1>New User</h1>
+		<h2>New User</h2>
 	</div>
 
-	<div class="innerContainer form" id="login">
-    <%= form_for (@user), url: user_session_path do |f| %>
-      <div class="inputGroup">
-			  <label>Email</label><%= f.text_field :email, type: "email", class: "baseInput", placeholder: "john.smith@domain.com" %>
-      </div>
-  		<div class="inputGroup">
-  			<label>Password</label><%= f.text_field :password, type: "password", class: "baseInput", placeholder: "johnsmithsecret" %>
-  		</div>
-  		<div class="buttonGroup">
-  			<%= f.button 'Login', type: "submit", class: "button", value: "Login" %>
-  			<p class="clearFix"><a href="#">Forgot Password</a>?<br>
-  				Don't have an account with us? <a href="#" class="toggleSignup">Signup</a>
-  			</p>
-  		</div>
-      <div class="clearFix"></div>
-    <% end %>
-	</div>
+
   
-	<div class="innerContainer form" id="signup">
+<div class="innerContainer form" id="signup">
     <%= form_for (@user) do |f| %>
       <%= signup_error_messages! %>  		
 		<div class="inputGroup">
@@ -44,17 +28,12 @@
   		</div>
   		<div class="buttonGroup">
   			<%= f.button 'Create user for Unsquad', type: "submit", class: "button", value: "Create user for Unsquad" %>
-			
-  			<!-- <p class="clearFix">
-  			<input type="checkbox" checked="checked" class="checkbox" />&nbsp;I agree to Unsquad <a href="#">Terms and Conditions</a>	
-  			<br>Already have an account with us? <a href="#" class="toggleSignup">Login</a>
-  			</p> -->
   		</div>
   		<div class="clearFix"></div>
     <% end %>
-	</div>
+</div>
 	
 </div>
 <script type="text/javascript">
-  Predicta.defineToggling();
+    Predicta.defineToggling();
 </script>

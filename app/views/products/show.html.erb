@@ -1,18 +1,8 @@
-<style type="text/css">
-  input[type=text] {
-    width: 90%;
-}
-</style>
-
 <div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
   <div class="row-fluid">
-    <div class="col-xs-1">
-      &nbsp;
-    </div>
     <div class="col-xs-6">
       <h4 style="padding-left: 0px;"><%= @product.model_code + " | " + @product.title %></h4>
-		
-		
+
 	    <table class="table table-hover">
 	      <tr>
 	        <th>
@@ -30,6 +20,12 @@
 			<th>
 			  Variation
 			</th>
+			<th>
+			  Material type
+			</th>
+			<th>
+			  Mounting type
+			</th>
 	      </tr>
 		    	<tr class="paletteRow">
 	          	  <td><%=raw(@product.title)%></td>
@@ -38,6 +34,8 @@
  				<td><%= raw(@product.model_code)%></td>
 	          	<td><%= raw(@product.model_number)%></td>
 				<td><%= raw(@product.variation_number)%></td>
+				<td><%= raw(@product.material_type)%></td>
+				<td><%= raw(@product.mounting_type)%></td>
 	        	</tr>
 	    </table>
 		
@@ -58,6 +56,9 @@
 			<th>
 			  Weigth
 			</th>
+			<th>
+				Finish type
+			</th>
 	      </tr>
 		    <tr class="paletteRow">
 	          	<td><%= raw(@product.pricing)%></td>
@@ -65,119 +66,101 @@
 	          	<td><%= raw(@product.height)%></td>
 				<td><%= raw(@product.depth)%></td>
 				<td><%= raw(@product.weight)%></td>
+				<td><%= raw(@product.finish_type)%>
+</td>
+				
 	        </tr>
 	    </table>
-			
+		
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Left Angle Render
+	        </th>
+	        <th>
+	          Right Angle Render
+	        </th>
+			<th>
+			  Front Render
+			</th>
+			<th>
+			  Decorated Front Render
+			</th>
+	      </tr>
+		    	<tr class="paletteRow">
+	          	  <td><%= link_to image_tag(@product.left_angle_render_url, size:"200", alt: "No Image Set"), @product.left_angle_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+				<td><%= link_to image_tag(@product.right_angle_render_url, size:"200", alt: "No Image Set"), @product.right_angle_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+	          	<td><%= link_to image_tag(@product.front_render_url, size:"200", alt: "No Image Set"), @product.front_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+				<td> <%= link_to image_tag(@product.decorated_front_render_url, size:"200", alt: "No Image Set"), @product.front_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+	        	</tr>
+	    </table>
+		
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Inside view 1
+	        </th>
+	        <th>
+	          Inside view 2
+	        </th>
+			<th>
+			  Dimensions image 1
+			</th>
+			<th>
+			  Dimensions image 2
+			</th>
+	      </tr>
+		    	<tr class="paletteRow">
+	          	  <td> <%= link_to image_tag(@product.inside_view_one, size:"200", alt: "No Image Set"), @product.inside_view_one, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+				<td> <%= link_to image_tag(@product.inside_view_two, size:"200", alt: "No Image Set"), @product.inside_view_two, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+	          	<td>  <%= link_to image_tag(@product.dimensions_image_one, size:"200", alt: "No Image Set"), @product.dimensions_image_one, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+				<td><%= link_to image_tag(@product.dimensions_image_two, size:"200", alt: "No Image Set"), @product.dimensions_image_two, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
+	        	</tr>
+	    </table>
+		
 		 	<div class="form-group">
-		 	  <label class="control-label" for="productShortDescription">Short Description</label>
+		 	  <label class="control-label" for="productShortDescription"><strong>Short Description</strong></label>
 		 	  <div class="controls">
   			  	<%= raw(@product.short_description)%>
 		 	  </div>
 		 	</div>
 	
 		 	<div class="form-group">
-		 	  <label class="control-label" for="productLongDescription">Long Description</label>
+		 	  <label class="control-label" for="productLongDescription"><strong>Long Description</strong></label>
 		 	  <div class="controls">
   			  <%= raw(@product.long_description)%>
 		 	  </div>
 		 	</div>
-	
+		
 		 	<div class="form-group">
-		 	  <label class="control-label" for="productMaterialType">Material type</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.material_type)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productMountingType">Mounting type</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.mounting_type)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productFinishType">Finish type</label>
-		 	  <div class="controls">
-   			  <%= raw(@product.finish_type)%>
-		 	  </div>
-		 	</div>
-	
-		 	<div class="form-group">
-		 	  <label class="control-label" for="productUsageTerms">Usage terms</label>
+		 	  <label class="control-label" for="productUsageTerms"><strong>Usage terms</strong></label>
 		 	  <div class="controls">
    			  <%= raw(@product.usage_terms)%>
 		 	  </div>
 		 	</div>
 	
 		 	<div class="form-group">
-		 	  <label class="control-label" for="productCleaningOfProduct">Cleaning instructions</label>
+		 	  <label class="control-label" for="productCleaningOfProduct"><strong>Cleaning instructions</strong></label>
 		 	  <div class="controls">
    			  <%= raw(@product.cleaning_of_product)%>				 
 		 	  </div>
 		 	</div>
 
 		 	<div class="form-group">
-		 	  <label class="control-label" for="productWarrantyTerms">Warranty terms</label>
+		 	  <label class="control-label" for="productWarrantyTerms"><strong>Warranty terms</strong></label>
 		 	  <div class="controls">
    			  <%= raw(@product.warranty_terms)%>
 		 	  </div>
 		 	</div>
 	
 		 	<div class="form-group">
-		 	  <label class="control-label" for="productWarrantyPeriod">Warranty period</label>
+		 	  <label class="control-label" for="productWarrantyPeriod"><strong>Warranty period</strong></label>
 		 	  <div class="controls">
     			  <%= raw(@product.warranty_period)%>
 		 	  </div>
 		 	</div>
 			
-		    <table class="table table-hover">
-		      <tr>
-		        <th>
-		          Left Angle Render
-		        </th>
-		        <th>
-		          Right Angle Render
-		        </th>
-				<th>
-				  Front Render
-				</th>
-				<th>
-				  Decorated Front Render
-				</th>
-		      </tr>
-			    	<tr class="paletteRow">
-		          	  <td><%= link_to image_tag(@product.left_angle_render_url, size:"200", alt: "No Image Set"), @product.left_angle_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-					<td><%= link_to image_tag(@product.right_angle_render_url, size:"200", alt: "No Image Set"), @product.right_angle_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-		          	<td><%= link_to image_tag(@product.front_render_url, size:"200", alt: "No Image Set"), @product.front_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-					<td> <%= link_to image_tag(@product.decorated_front_render_url, size:"200", alt: "No Image Set"), @product.front_render_url, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-		        	</tr>
-		    </table>
-			
-		    <table class="table table-hover">
-		      <tr>
-		        <th>
-		          Inside view 1
-		        </th>
-		        <th>
-		          Inside view 2
-		        </th>
-				<th>
-				  Dimensions image 1
-				</th>
-				<th>
-				  Dimensions image 2
-				</th>
-		      </tr>
-			    	<tr class="paletteRow">
-		          	  <td> <%= link_to image_tag(@product.inside_view_one, size:"200", alt: "No Image Set"), @product.inside_view_one, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-					<td> <%= link_to image_tag(@product.inside_view_two, size:"200", alt: "No Image Set"), @product.inside_view_two, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-		          	<td>  <%= link_to image_tag(@product.dimensions_image_one, size:"200", alt: "No Image Set"), @product.dimensions_image_one, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-					<td><%= link_to image_tag(@product.dimensions_image_two, size:"200", alt: "No Image Set"), @product.dimensions_image_two, :data => { :colorbox => true, :colorbox_height => '700px', :colorbox_width => '700px', :colorbox_iframe => true} %></td>
-		        	</tr>
-		    </table>
-			
-			  <label class="control-label" for="productSketchupFileEmbedCode">Sketchup File</label>
+			  <label class="control-label" for="productSketchupFileEmbedCode"><strong>Sketchup File</strong></label>
 			  <br/>
 				<%= render(:partial => "sketchup_iframe", :object => {:product => @product}) %>
 			  	

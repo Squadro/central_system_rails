@@ -1,53 +1,56 @@
 <% product_codes = manage_product_codes[:product_codes] %>
-<div class="container-fluid" style="padding-top: 60px;padding-bottom: 60px;">
+<div class="container-fluid">
   <div class="row-fluid">
-    <h3>Manage Product Codes</h3>
+    <h4 class="sub-header"name="manage-codes">Manage Product Codes</h4>
  	<% if can? :create, ProductCode %>
-		<a href="/product_codes/new" class="btn btn-primary" style="float: right">New Product Code [+]</a>
+		<a href="/product_codes/new" class="btn btn-primary new-create">New Code [+]</a>
     <% end %>
 	<br/>
     <br/>
-    <table class="table table-hover">
-      <tr>
-        <th>
-          Code
-        </th>
-        <th>
-		  Description
-        </th>
-		<th>
-			Actions
-		</th>
-      </tr>
-	  <% if product_codes.present? %>
+	<div class="table-responsive">
+	    <table class="table table-hover">
+	      <tr>
+	        <th>
+	          Code
+	        </th>
+	        <th>
+			  Description
+	        </th>
+			<th>
+				Actions
+			</th>
+	      </tr>
+		  <% if product_codes.present? %>
 	  
-      <% product_codes.each do |product_code| %>
-        <tr class="productCodeRow">
-          <td>
-            <%= product_code.name %>
-          </td>
-          <td>
-            <%= product_code.description %>
-          </td>
-          <td>
-			<div class="btn-group">
- 			 <% if can? :update, product_code %>		
-			 <a href="/product_codes/<%= product_code.id %>/edit">
-			  <button type="button" class="btn btn-default editProductCodeButton" data-ProductCodeId="<%= product_code.id %>"> <span class="glyphicon glyphicon-edit"></span> Edit</button>
-		  	</a>
-			 <% end %>
-  			 <% if can? :destroy, product_code %>
-			  <button type="button" class="btn btn-default deleteProductCodeButton" data-ProductCodeId="<%= product_code.id %>"> <span class="glyphicon glyphicon-remove"></span> Delete</button>
-			 <% end %>
-			</div>
-          </td>
-        </tr>
-		<% end %>
+	      <% product_codes.each do |product_code| %>
+	        <tr class="productCodeRow">
+	          <td>
+	            <%= product_code.name %>
+	          </td>
+	          <td>
+	            <%= product_code.description %>
+	          </td>
+	          <td>
+	 			 <% if can? :update, product_code %>		
+				 	<a href="/product_codes/<%= product_code.id %>/edit">
+				 	   <button title="Edit" type="button" class="btn btn-default editProductCodeButton" data-ProductCodeId="<%= product_code.id %>"> 
+						   <span class="glyphicon glyphicon-edit"></span>
+					   </button>
+			  		</a>
+				 <% end %>
+	  			 <% if can? :destroy, product_code %>
+				  <button type="button" title="Remove" class="btn btn-default deleteProductCodeButton" data-ProductCodeId="<%= product_code.id %>"> <span class="glyphicon glyphicon-remove"></span></button>
+				 <% end %>
+	          </td>
+	        </tr>
+			<% end %>
 		
-      <% end %>
-    </table>
+	      <% end %>
+	    </table>
+	</div>
+
  	<% if can? :create, ProductCode %>
-		<a href="/product_codes/new" class="btn btn-primary" style="float: right">New Product Code [+]</a>
+		<a href="/product_codes/new" class="btn btn-primary new-create">New Code [+]</a>
     <% end %>
   </div>
 </div>

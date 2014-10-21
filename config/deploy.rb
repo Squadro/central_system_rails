@@ -12,7 +12,7 @@ set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
-set :repository, "git@bitbucket.org:anilbhandary/predicta.git" #your application repo (for instance git@github.com:user/application.git)
+set :repository, "git@github.com:Squadro/central_system_rails.git" #your application repo (for instance git@github.com:user/application.git)
 set :scm_username, "anilbhandary"
 set :scm_prefer_prompt, :true
 set :scm_verbose, :true
